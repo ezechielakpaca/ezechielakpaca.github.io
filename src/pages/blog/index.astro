@@ -9,14 +9,15 @@ const formatDate = (d: Date) => d.toLocaleDateString('fr-FR', { day: 'numeric', 
 ---
 <Base title="Blog" active="blog" description="Articles de Marie-Ezéchiel Akpaca sur le développement, le produit et l'UX.">
   <section class="page-head">
+    <div class="blob a" aria-hidden="true"></div>
+    <div class="blob b" aria-hidden="true"></div>
     <div class="wrap">
-      <a class="back" href="/">← Accueil</a>
-      <p class="eyebrow" style="margin-top:28px">Blog</p>
-      <h1>Ce que j’<span class="accent">apprends</span> en chemin.</h1>
-      <p class="intro">Notes sur le développement Java et web, la conception de produits et l’UX.</p>
+      <span class="crumbs glass rise"><a href="/">Accueil</a> / Blog</span>
+      <h1 class="rise" style="--d:.1s">Le <span class="accent">blog</span>.</h1>
+      <p class="intro rise" style="--d:.2s">Développement, produit et UX.</p>
     </div>
   </section>
-  <section class="section">
+  <section class="section tight">
     <div class="wrap">
       {articles.length > 0 ? (
         <div class="posts">
@@ -25,12 +26,12 @@ const formatDate = (d: Date) => d.toLocaleDateString('fr-FR', { day: 'numeric', 
               <span class="meta"><time datetime={a.data.date.toISOString()}>{formatDate(a.data.date)}</time></span>
               <h3>{a.data.titre}</h3>
               <p>{a.data.description}</p>
-              <span class="link-arrow">Lire l’article <span class="arr">↗</span></span>
+              <span class="link-arrow">Lire <span class="arr">↗</span></span>
             </a>
           ))}
         </div>
       ) : (
-        <p class="empty">Le premier article arrive bientôt.</p>
+        <p class="empty glass">Le premier article arrive bientôt.</p>
       )}
     </div>
   </section>

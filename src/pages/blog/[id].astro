@@ -14,12 +14,13 @@ const date = a.date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long',
 ---
 <Base title={a.titre} description={a.description} active="blog">
   <section class="page-head">
+    <div class="blob a" aria-hidden="true"></div>
+    <div class="blob b" aria-hidden="true"></div>
     <div class="wrap">
-      <a class="back" href="/blog/">← Tous les articles</a>
-      <p class="eyebrow" style="margin-top:28px"><time datetime={a.date.toISOString()}>{date}</time></p>
-      <h1>{a.titre}</h1>
-      <p class="intro">{a.description}</p>
-      {a.tags.length > 0 && <div class="facts">{a.tags.map((t) => <span class="pill">{t}</span>)}</div>}
+      <span class="crumbs glass rise"><a href="/">Accueil</a> / <a href="/blog/">Blog</a> / <time datetime={a.date.toISOString()}>{date}</time></span>
+      <h1 class="rise" style="--d:.1s">{a.titre}</h1>
+      <p class="intro rise" style="--d:.2s">{a.description}</p>
+      {a.tags.length > 0 && <div class="pills rise" style="--d:.3s;margin-top:24px">{a.tags.map((t) => <span class="pill">{t}</span>)}</div>}
     </div>
   </section>
   <div class="wrap">

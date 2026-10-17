@@ -1,27 +1,63 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import ProjectCard from '../../components/ProjectCard.astro';
+import GridCard from '../../components/GridCard.astro';
 
 const projets = (await getCollection('projets', ({ data }) => !data.brouillon))
   .sort((a, b) => a.data.ordre - b.data.ordre || b.data.date.valueOf() - a.data.date.valueOf());
+
+// Categories built from the « domaine » field of each project
+const domaines = [...new Set(projets.map((p) => p.data.domaine))];
+const compte = (d: string) => projets.filter((p) => p.data.domaine === d).length;
 ---
-<Base title="Projets" active="projets" description="Projets de Marie-Ezéchiel Akpaca : développement Java et full-stack, produit numérique et UX.">
+<Base title="Projets" active="projets" description="Projets de Marie-Ezéchiel Akpaca : développement Java, full-stack, produit et UX.">
   <section class="page-head">
+    <div class="blob a" aria-hidden="true"></div>
+    <div class="blob b" aria-hidden="true"></div>
     <div class="wrap">
-      <a class="back" href="/">← Accueil</a>
-      <p class="eyebrow" style="margin-top:28px">Portfolio</p>
-      <h1>Tous mes <span class="accent">projets</span>.</h1>
-      <p class="intro">Développement et produit numérique. Chaque fiche détaille le contexte, ce que j’ai fait et les outils utilisés.</p>
+      <span class="crumbs glass rise"><a href="/">Accueil</a> / Projets</span>
+      <h1 class="rise" style="--d:.1s">Mes <span class="accent">projets</span>.</h1>
+      <p class="intro rise" style="--d:.2s">Développement, produit et UX.</p>
     </div>
   </section>
-  <section class="section">
+
+  <section class="section tight">
     <div class="wrap">
       {projets.length > 0 ? (
-        <div class="works">{projets.map((p, i) => <ProjectCard projet={p} index={i} />)}</div>
+        <>
+          <div class="filters glass reveal" role="group" aria-label="Filtrer par catégorie">
+            <button class="filter on" type="button" data-filter="*" aria-pressed="true">Tous <sup>{projets.length}</sup></button>
+            {domaines.map((d) => (
+              <button class="filter" type="button" data-filter={d} aria-pressed="false">{d} <sup>{compte(d)}</sup></button>
+            ))}
+          </div>
+          <div class="grid" id="grid">
+            {projets.map((p, i) => <GridCard projet={p} index={i} />)}
+          </div>
+        </>
       ) : (
-        <p class="empty">Aucun projet publié pour l’instant.</p>
+        <p class="empty glass">Aucun projet publié pour l’instant.</p>
       )}
     </div>
   </section>
+
+  <script>
+    const buttons = document.querySelectorAll<HTMLButtonElement>('.filter');
+    const cards = document.querySelectorAll<HTMLElement>('#grid .card');
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const f = btn.dataset.filter;
+        buttons.forEach((b) => { const on = b === btn; b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on)); });
+        cards.forEach((c) => c.classList.add('fading'));
+        setTimeout(() => {
+          cards.forEach((c) => {
+            const show = f === '*' || c.dataset.domaine === f;
+            c.classList.toggle('hide', !show);
+            c.classList.add('in');
+          });
+          requestAnimationFrame(() => requestAnimationFrame(() => cards.forEach((c) => c.classList.remove('fading'))));
+        }, 250);
+      });
+    });
+  </script>
 </Base>

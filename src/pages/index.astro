@@ -23,24 +23,23 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
 <Base>
   <!-- ============ HERO ============ -->
   <section class="hero">
+    <div class="blob a" aria-hidden="true"></div>
+    <div class="blob b" aria-hidden="true"></div>
     <div class="wrap">
       <div>
-        <p class="hello rise" style="--d:.05s"><span class="wave" aria-hidden="true">👋</span> Bonjour !</p>
+        <p class="hello glass rise" style="--d:.05s"><span class="wave" aria-hidden="true">👋</span> Bonjour !</p>
         <h1 class="rise" style="--d:.15s">Je suis Marie&#8209;Ezéchiel <span class="accent">Akpaca</span></h1>
         <p class="role rise" style="--d:.28s">Développeur <span class="typed" id="typed">Java / Spring Boot</span></p>
-        <p class="intro rise" style="--d:.4s">
-          Étudiant en L3 MIAGE à l’Université de Lille. Un an de backend sur un core banking system, puis la conception UX d’une application de microcrédit.
-          Je cherche un stage de 12 semaines à partir du 19 avril 2027.
-        </p>
+        <p class="intro rise" style="--d:.4s">Étudiant en L3 MIAGE à Lille. Je cherche un stage de 12 semaines dès le 19 avril 2027.</p>
         <div class="hero-cta rise" style="--d:.52s">
-          <a class="btn btn-fill" href="#contact">Me proposer un stage <span class="arr">↗</span></a>
-          <a class="btn btn-line" href="/projets/">Voir mes projets</a>
+          <a class="btn btn-fill" href="#contact">Me contacter <span class="arr">↗</span></a>
+          <a class="btn btn-line" href="/projets/">Mes projets</a>
           <a class="badge-rot" href="#a-propos" aria-label="Défiler vers la présentation">
-            <svg class="ring" viewBox="0 0 118 118" aria-hidden="true">
-              <defs><path id="circ" d="M59,59 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0" /></defs>
-              <text><textPath href="#circ">Stage · avril 2027 · Disponible · Lille ·</textPath></text>
+            <svg class="ring" viewBox="0 0 112 112" aria-hidden="true">
+              <defs><path id="circ" d="M56,56 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" /></defs>
+              <text><textPath href="#circ">Stage · avril 2027 · Lille ·</textPath></text>
             </svg>
-            <span class="core"><svg viewBox="0 0 20 20"><path d="M10 3v14M4 11l6 6 6-6" /></svg></span>
+            <span class="core glass"><svg viewBox="0 0 20 20"><path d="M10 3v14M4 11l6 6 6-6" /></svg></span>
           </a>
         </div>
       </div>
@@ -48,8 +47,8 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
       <div class="hero-photo rise" style="--d:.2s">
         <div class="orbit" aria-hidden="true"></div>
         <div class="disc"><Image src={photo} alt={`Portrait de ${profil.nom}`} width={460} loading="eager" /></div>
-        <div class="chip c1"><i aria-hidden="true">☕</i><div>Java / Spring Boot<small>1 an en core banking</small></div></div>
-        <div class="chip c2"><i aria-hidden="true">✦</i><div>Stage dès le 19.04.2027<small>12 semaines · Lille</small></div></div>
+        <div class="chip c1 glass"><i aria-hidden="true" class="devicon-java-plain"></i><div>Java / Spring Boot<small>1 an en banque</small></div></div>
+        <div class="chip c2 glass"><i aria-hidden="true">✦</i><div>Stage avril 2027<small>12 semaines · Lille</small></div></div>
       </div>
     </div>
   </section>
@@ -75,31 +74,29 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
     <div class="wrap about">
       <div class="reveal">
         <p class="eyebrow">À propos</p>
-        <p class="about-statement">Je comprends le <b>besoin métier</b>, je dessine le <b>parcours</b>, puis je <b class="accent">code le produit</b>.</p>
-        <p class="about-text">
-          Formé à l’informatique au Bénin (licence à l’IFRI) puis à Lille, j’ai travaillé sur des services bancaires en Java / Spring Boot avant de rejoindre l’équipe UX.
-          Je suis aussi chef de produit digital chez Oranex Tech. Cette double pratique me permet de parler aussi bien aux développeurs qu’aux utilisateurs.
-        </p>
+        <p class="about-statement">Je comprends le <b>besoin</b>, je dessine le <b>parcours</b>, puis je <b class="accent">code le produit</b>.</p>
+        <p class="about-text">Backend Java en banque, UX d’une application de microcrédit, gestion de produit : je fais le lien entre utilisateurs et développeurs.</p>
       </div>
-      <div class="stats reveal" style="--d:.15s">
-        {chiffres.map((c) => (
-          <div class="stat"><b>{c.valeur}<em> {c.unite}</em></b><span>{c.label}</span></div>
-        ))}
+      <div class="stats-wrap reveal" style="--d:.15s">
+        <div class="blob a" aria-hidden="true"></div>
+        <div class="blob b" aria-hidden="true"></div>
+        <div class="stats">
+          {chiffres.map((c) => (
+            <div class="stat glass"><b>{c.valeur}<em>{c.unite}</em></b><span>{c.label}</span></div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ============ STAGE ============ -->
-  <section class="section" id="stage" style="padding-top:0">
+  <section class="section tight" id="stage">
     <div class="wrap">
       <div class="stage-card reveal">
         <div>
           <p class="eyebrow">Stage recherché</p>
-          <h2>12 semaines pour construire un vrai produit avec votre équipe.</h2>
-          <p class="lead">Stage de fin de L3 MIAGE. Le développement en priorité, avec une dimension produit et utilisateur.</p>
-          <ul class="missions">
-            {stage.missions.map((m) => <li><b>{m.titre}</b><span>{m.detail}</span></li>)}
-          </ul>
+          <h2>12 semaines dès le 19 avril 2027.</h2>
+          <ul class="missions">{stage.missions.map((m) => <li>{m}</li>)}</ul>
         </div>
         <dl class="fiche">
           {stage.fiche.map((f) => (
@@ -111,11 +108,11 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
   </section>
 
   <!-- ============ PROJETS ============ -->
-  <section class="section" id="projets" style="padding-top:0">
+  <section class="section tight" id="projets">
     <div class="wrap">
       <div class="section-head reveal">
         <div>
-          <p class="eyebrow">Mes projets</p>
+          <p class="eyebrow">Projets</p>
           <h2><b>Projets</b> sélectionnés.</h2>
         </div>
         <a class="btn btn-line" href="/projets/">Tous les projets <span class="arr">↗</span></a>
@@ -127,14 +124,13 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
   </section>
 
   <!-- ============ PARCOURS ============ -->
-  <section class="section" id="parcours" style="padding-top:0">
+  <section class="section tight" id="parcours">
     <div class="wrap">
       <div class="section-head reveal">
         <div>
           <p class="eyebrow">Expériences</p>
           <h2>Mon <b>parcours</b>.</h2>
         </div>
-        <p>Du backend bancaire à la conception d’interfaces, en passant par la gestion de produit.</p>
       </div>
       <ol class="timeline">
         {experiences.map((e, i) => (
@@ -142,7 +138,6 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
             <div class="when"><b>{e.quand}</b>{e.ou}</div>
             <div>
               <h3>{e.poste}</h3>
-              <div class="org">{e.contexte}</div>
               <ul>{e.points.map((pt) => <li set:html={pt} />)}</ul>
               {e.tags.length > 0 && <div class="pills">{e.tags.map((t) => <span class="pill">{t}</span>)}</div>}
             </div>
@@ -154,28 +149,28 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
   </section>
 
   <!-- ============ COMPÉTENCES ============ -->
-  <section class="section" id="competences" style="padding-top:0">
-    <div class="wrap">
-      <div class="section-head reveal" style="justify-content:center;text-align:center">
+  <section class="section tight" id="competences">
+    <div class="wrap skills-zone">
+      <div class="blob a" aria-hidden="true"></div>
+      <div class="blob b" aria-hidden="true"></div>
+      <div class="section-head center reveal" style="position:relative;z-index:1">
         <div>
           <p class="eyebrow">Compétences</p>
-          <h2>De la base de données <b>à l’écran</b>.</h2>
+          <h2>Ma <b>stack</b>.</h2>
         </div>
       </div>
       <div class="capsules">
         {technos.map((t, i) => (
-          <div class="capsule reveal" style={`--d:${i * 0.07}s`}>
+          <div class="capsule glass reveal" style={`--d:${i * 0.07}s`}>
             <span class="ico"><i class={t.icone} aria-hidden="true"></i></span>
             <b>{t.nom}</b>
-            <span>{t.role}</span>
           </div>
         ))}
       </div>
-      <div class="skill-groups">
+      <div class="skill-rows">
         {competences.map((c, i) => (
-          <div class="skill-group reveal" style={`--d:${(i % 3) * 0.08}s`}>
+          <div class="skill-row reveal" style={`--d:${i * 0.07}s`}>
             <p class="eyebrow">{c.label}</p>
-            <h3 style="margin-top:8px">{c.titre}</h3>
             <ul>{c.items.map((it) => <li>{it}</li>)}</ul>
           </div>
         ))}
@@ -184,7 +179,7 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
   </section>
 
   <!-- ============ FORMATION ============ -->
-  <section class="section" id="formation" style="padding-top:0">
+  <section class="section tight" id="formation">
     <div class="wrap">
       <div class="section-head reveal">
         <div>
@@ -198,7 +193,7 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
           {formation.map((f) => (
             <div class="edu-item">
               <b>{f.titre}</b><span class="yr">{f.annees}</span>
-              <span class="d">{f.detail}</span>
+              <span class="d">{f.lieu}</span>
               {f.note && <span class="note">{f.note}</span>}
             </div>
           ))}
@@ -216,7 +211,7 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
 
   <!-- ============ BLOG ============ -->
   {articles.length > 0 && (
-    <section class="section" id="blog" style="padding-top:0">
+    <section class="section tight" id="blog">
       <div class="wrap">
         <div class="section-head reveal">
           <div>
@@ -231,7 +226,7 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
               <span class="meta"><time datetime={a.data.date.toISOString()}>{formatDate(a.data.date)}</time></span>
               <h3>{a.data.titre}</h3>
               <p>{a.data.description}</p>
-              <span class="link-arrow">Lire l’article <span class="arr">↗</span></span>
+              <span class="link-arrow">Lire <span class="arr">↗</span></span>
             </a>
           ))}
         </div>
@@ -242,7 +237,7 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
   <script>
     // Rotating role in the hero
     const el = document.getElementById('typed');
-    const roles = ['Java / Spring Boot', 'full-stack', 'à l’esprit produit & UX'];
+    const roles = ['Java / Spring Boot', 'full-stack', 'orienté produit & UX'];
     if (el && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       let i = 0;
       el.style.transition = 'opacity .35s, transform .35s';

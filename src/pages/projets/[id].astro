@@ -1,36 +1,63 @@
 ---
 import { getCollection, render } from 'astro:content';
-import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
+import ProjectVisual from '../../components/ProjectVisual.astro';
 
 export async function getStaticPaths() {
-  const projets = await getCollection('projets', ({ data }) => !data.brouillon);
-  return projets.map((projet) => ({ params: { id: projet.id }, props: { projet } }));
+  const projets = (await getCollection('projets', ({ data }) => !data.brouillon))
+    .sort((a, b) => a.data.ordre - b.data.ordre || b.data.date.valueOf() - a.data.date.valueOf());
+  return projets.map((projet, i) => ({
+    params: { id: projet.id },
+    props: { projet, prev: projets[i - 1], next: projets[i + 1] },
+  }));
 }
 
-const { projet } = Astro.props;
+const { projet, prev, next } = Astro.props;
 const p = projet.data;
 const { Content } = await render(projet);
 ---
 <Base title={p.titre} description={p.resume} active="projets">
   <section class="page-head">
+    <div class="blob a" aria-hidden="true"></div>
+    <div class="blob b" aria-hidden="true"></div>
     <div class="wrap">
-      <a class="back" href="/projets/">← Tous les projets</a>
-      <p class="eyebrow" style="margin-top:28px">{p.categorie}</p>
-      <h1>{p.titre}</h1>
-      <p class="intro">{p.resume}</p>
-      <div class="facts">
-        {(p.statut || p.periode) && <span class="pill">{p.statut ?? p.periode}</span>}
-        {p.tags.map((t) => <span class="pill">{t}</span>)}
-        {p.depot && <a class="pill" href={p.depot} target="_blank" rel="noopener">Code source ↗</a>}
-        {p.demo && <a class="pill" href={p.demo} target="_blank" rel="noopener">Voir en ligne ↗</a>}
-      </div>
-      {p.image && <Image class="cover-wide" src={p.image} alt="" width={1240} />}
+      <span class="crumbs glass rise"><a href="/">Accueil</a> / <a href="/projets/">Projets</a> / {p.domaine}</span>
+      <h1 class="rise" style="--d:.1s">{p.titre}</h1>
+      <p class="intro rise" style="--d:.2s">{p.resume}</p>
     </div>
   </section>
+
   <div class="wrap">
-    <article class="prose">
+    <div class="detail-cover rise" style="--d:.25s">
+      <ProjectVisual projet={projet} width={1240} />
+    </div>
+    <dl class="info glass rise" style="--d:.35s">
+      <div><dt>Catégorie</dt><dd>{p.domaine}</dd></div>
+      <div><dt>Contexte</dt><dd>{p.categorie}</dd></div>
+      <div><dt>{p.statut ? 'Statut' : 'Période'}</dt><dd>{p.statut ?? p.periode ?? p.date.getFullYear()}</dd></div>
+      <div>
+        {p.depot || p.demo ? (
+          <>
+            <dt>Liens</dt>
+            <dd>
+              {p.depot && <a href={p.depot} target="_blank" rel="noopener">Code ↗</a>}
+              {p.depot && p.demo && ' · '}
+              {p.demo && <a href={p.demo} target="_blank" rel="noopener">Démo ↗</a>}
+            </dd>
+          </>
+        ) : (
+          <><dt>Stack</dt><dd>{p.tags.slice(0, 3).join(', ')}</dd></>
+        )}
+      </div>
+    </dl>
+
+    <article class="story">
       <Content />
     </article>
+
+    <nav class="next" aria-label="Autres projets">
+      {prev && <a href={`/projets/${prev.id}/`}><small>← Précédent</small><b>{prev.data.titre}</b></a>}
+      {next && <a class="right" href={`/projets/${next.id}/`}><small>Suivant →</small><b>{next.data.titre}</b></a>}
+    </nav>
   </div>
 </Base>

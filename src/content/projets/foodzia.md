@@ -1,7 +1,9 @@
 ---
 titre: Foodzia
-resume: Un produit numérique pour le repas du midi des salariés, avec menus du jour, suivi des soldes et paiement par QR code.
+resume: Menus du jour, suivi du solde repas et paiement par QR code pour les salariés.
 categorie: Projet personnel · concept
+domaine: Produit & UX
+role: Conception produit et UX
 date: 2026-09-01
 statut: En conception
 tags: [Produit, UX, Mobile]

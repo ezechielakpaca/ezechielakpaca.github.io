@@ -1,7 +1,9 @@
 ---
 titre: Travaux de L3 MIAGE
-resume: TD et TP de l'Université de Lille en Java, Haskell et C, autour de la conception orientée objet, des tests et de la programmation système.
+resume: TD et TP en Java, Haskell et C — conception objet, tests et programmation système.
 categorie: Université de Lille · TD / TP
+domaine: Développement
+role: Étudiant
 date: 2026-10-01
 periode: 2026–2027
 tags: [Java, Haskell, C, TDD]

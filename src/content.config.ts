@@ -9,6 +9,9 @@ const projets = defineCollection({
       titre: z.string(),
       resume: z.string(),
       categorie: z.string(),
+      // Catégorie utilisée par les filtres de la page Projets
+      domaine: z.string().default('Développement'),
+      role: z.string().optional(),
       date: z.coerce.date(),
       periode: z.string().optional(),
       statut: z.string().optional(),
