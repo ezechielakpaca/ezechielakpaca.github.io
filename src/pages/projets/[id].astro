@@ -17,7 +17,7 @@ const { projet, prev, next } = Astro.props;
 const p = projet.data;
 const { Content } = await render(projet);
 ---
-<Base title={`${p.titre} — ${p.categories.join(', ')}`} description={p.resume} active="projets" jsonld={[{
+<Base title={`${p.titre} — ${p.categories.join(', ')}`} description={p.resume} active="projets" ogImagePath={`/og/${projet.id}.jpg`} ogImageAlt={`Couverture du projet ${p.titre}`} jsonld={[{
   '@context': 'https://schema.org',
   '@type': 'CreativeWork',
   name: p.titre,

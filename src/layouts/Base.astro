@@ -10,6 +10,9 @@ interface Props {
   type?: 'website' | 'article';
   /** Données structurées propres à la page (JSON-LD) */
   jsonld?: Record<string, unknown>[];
+  /** Image de partage (chemin public), 1200 × 630 */
+  ogImagePath?: string;
+  ogImageAlt?: string;
 }
 
 const {
@@ -18,6 +21,8 @@ const {
   active,
   type = 'website',
   jsonld = [],
+  ogImagePath = '/og.png',
+  ogImageAlt,
 } = Astro.props;
 
 const site = Astro.site!;
@@ -25,7 +30,7 @@ const pageTitle = title
   ? `${title} · ${profil.nom}`
   : `${profil.nom} — Stagiaire développeur Java / full-stack & UX designer à Lille`;
 const canonical = new URL(Astro.url.pathname, site);
-const ogImage = new URL('/og.png', site);
+const ogImage = new URL(ogImagePath, site);
 const annee = new Date().getFullYear();
 
 // Identity shared by every page, so search engines link the site to the person
@@ -72,7 +77,7 @@ const schemas = [personne, ...jsonld];
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={`${profil.nom}, stagiaire développeur Java / full-stack et UX designer`} />
+    <meta property="og:image:alt" content={ogImageAlt ?? `${profil.nom}, stagiaire développeur Java / full-stack et UX designer`} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
