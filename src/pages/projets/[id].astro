@@ -17,7 +17,18 @@ const { projet, prev, next } = Astro.props;
 const p = projet.data;
 const { Content } = await render(projet);
 ---
-<Base title={p.titre} description={p.resume} active="projets">
+<Base title={`${p.titre} — ${p.categories.join(', ')}`} description={p.resume} active="projets" jsonld={[{
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: p.titre,
+  description: p.resume,
+  url: new URL(`/projets/${projet.id}/`, Astro.site).href,
+  genre: p.categories,
+  keywords: p.tags.join(', '),
+  dateCreated: p.periode ?? String(p.date.getFullYear()),
+  inLanguage: 'fr-FR',
+  creator: { '@id': new URL('/#personne', Astro.site).href },
+}]}>
   <section class="page-head">
     <div class="blob a" aria-hidden="true"></div>
     <div class="blob b" aria-hidden="true"></div>

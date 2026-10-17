@@ -11,7 +11,7 @@ const projets = (await getCollection('projets', ({ data }) => !data.brouillon))
 const compte = (c: string) => projets.filter((p) => (p.data.categories as string[]).includes(c)).length;
 const domaines = ordreCategories.filter((c) => compte(c) > 0);
 ---
-<Base title="Projets" active="projets" description="Projets UX design de Marie-Ezéchiel Akpaca : applications mobiles et web.">
+<Base title="Projets UX design — applications mobiles et web" active="projets" description="Projets de Marie-Ezéchiel Akpaca, étudiant en informatique à Lille : UX design et conception d’applications mobiles et web (Domoo, Foodzia, eTontine, Kimmobilier…).">
   <section class="page-head">
     <div class="blob a" aria-hidden="true"></div>
     <div class="blob b" aria-hidden="true"></div>

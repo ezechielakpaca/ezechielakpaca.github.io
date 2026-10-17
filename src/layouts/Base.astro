@@ -6,17 +6,50 @@ interface Props {
   title?: string;
   description?: string;
   active?: 'accueil' | 'projets' | 'blog' | 'parcours' | 'contact';
+  /** « article » pour les articles de blog */
+  type?: 'website' | 'article';
+  /** Données structurées propres à la page (JSON-LD) */
+  jsonld?: Record<string, unknown>[];
 }
 
 const {
   title,
-  description = `${profil.nom}, étudiant en L3 MIAGE à Lille, développeur Java / full-stack avec une pratique UX. Stage de 12 semaines recherché à partir du 19 avril 2027.`,
+  description = 'Marie-Ezéchiel Akpaca, étudiant en L3 MIAGE à Lille, cherche un stage en informatique dès avril 2027 : développeur Java / Spring Boot, full-stack et UX designer.',
   active,
+  type = 'website',
+  jsonld = [],
 } = Astro.props;
 
-const pageTitle = title ? `${title} · ${profil.nom}` : `${profil.nom} — Développeur Java / full-stack`;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+const site = Astro.site!;
+const pageTitle = title
+  ? `${title} · ${profil.nom}`
+  : `${profil.nom} — Stagiaire développeur Java / full-stack & UX designer à Lille`;
+const canonical = new URL(Astro.url.pathname, site);
+const ogImage = new URL('/og.png', site);
 const annee = new Date().getFullYear();
+
+// Identity shared by every page, so search engines link the site to the person
+const personne = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': new URL('/#personne', site).href,
+  name: profil.nom,
+  alternateName: ['Ezéchiel Akpaca', 'Bidossessi Marie-Ezéchiel Akpaca'],
+  url: site.href,
+  image: new URL('/photo-profil.jpg', site).href,
+  email: `mailto:${profil.email}`,
+  jobTitle: 'Développeur Java / full-stack et UX designer, en recherche de stage',
+  description: 'Étudiant en L3 MIAGE à l’Université de Lille, à la recherche d’un stage de 12 semaines à partir du 19 avril 2027 en développement Java / Spring Boot, full-stack ou UX design.',
+  address: { '@type': 'PostalAddress', addressLocality: 'Lille', addressRegion: 'Hauts-de-France', addressCountry: 'FR' },
+  affiliation: { '@type': 'CollegeOrUniversity', name: 'Université de Lille' },
+  alumniOf: [
+    { '@type': 'CollegeOrUniversity', name: 'IFRI, Université d’Abomey-Calavi' },
+    { '@type': 'EducationalOrganization', name: 'Lycée Théophile-Legrand' },
+  ],
+  knowsAbout: ['Java', 'Spring Boot', 'API REST', 'SQL', 'Vue.js', 'React', 'UX design', 'UI design', 'Figma', 'Analyse fonctionnelle', 'Développement full-stack'],
+  sameAs: [profil.liens.linkedin, profil.liens.github, profil.liens.behance],
+};
+const schemas = [personne, ...jsonld];
 ---
 <!doctype html>
 <html lang="fr" data-theme="light">
@@ -25,12 +58,26 @@ const annee = new Date().getFullYear();
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <meta name="author" content={profil.nom} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="theme-color" content="#f3f7f6" id="theme-color" />
     <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:site_name" content={profil.nom} />
+    <meta property="og:locale" content="fr_FR" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={type} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${profil.nom}, stagiaire développeur Java / full-stack et UX designer`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    {schemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)} />)}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <!-- Apply the saved theme before the first paint (light by default) -->
     <script is:inline>

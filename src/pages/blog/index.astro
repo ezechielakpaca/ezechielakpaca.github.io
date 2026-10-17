@@ -7,7 +7,7 @@ const articles = (await getCollection('blog', ({ data }) => !data.brouillon))
 
 const formatDate = (d: Date) => d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
-<Base title="Blog" active="blog" description="Articles de Marie-Ezéchiel Akpaca sur le développement, le produit et l'UX.">
+<Base title="Blog — développement, UX et produit" active="blog" description="Articles de Marie-Ezéchiel Akpaca, étudiant en L3 MIAGE à Lille, sur le développement Java, l’UX design et la conception de produits.">
   <section class="page-head">
     <div class="blob a" aria-hidden="true"></div>
     <div class="blob b" aria-hidden="true"></div>

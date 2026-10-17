@@ -12,7 +12,18 @@ const a = article.data;
 const { Content } = await render(article);
 const date = a.date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
-<Base title={a.titre} description={a.description} active="blog">
+<Base title={a.titre} description={a.description} active="blog" type="article" jsonld={[{
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: a.titre,
+  description: a.description,
+  datePublished: a.date.toISOString(),
+  inLanguage: 'fr-FR',
+  keywords: a.tags.join(', '),
+  mainEntityOfPage: new URL(`/blog/${article.id}/`, Astro.site).href,
+  image: new URL('/og.png', Astro.site).href,
+  author: { '@id': new URL('/#personne', Astro.site).href },
+}]}>
   <section class="page-head">
     <div class="blob a" aria-hidden="true"></div>
     <div class="blob b" aria-hidden="true"></div>

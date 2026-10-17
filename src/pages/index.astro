@@ -20,7 +20,10 @@ const articles = (await getCollection('blog', ({ data }) => !data.brouillon))
 const formatDate = (d: Date) => d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
 const pad = (n: number) => String(n + 1).padStart(2, '0');
 ---
-<Base active="accueil">
+<Base active="accueil" jsonld={[
+  { '@context': 'https://schema.org', '@type': 'WebSite', name: profil.nom, url: Astro.site!.href, inLanguage: 'fr-FR', author: { '@id': new URL('/#personne', Astro.site).href } },
+  { '@context': 'https://schema.org', '@type': 'ProfilePage', url: Astro.site!.href, inLanguage: 'fr-FR', mainEntity: { '@id': new URL('/#personne', Astro.site).href } },
+]}>
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="blob a" aria-hidden="true"></div>
