@@ -2,12 +2,8 @@
 titre: Kimmobilier
 resume: Plateforme web immobilière pour trouver, publier et suivre des biens — « votre prochain chez-vous en un clic ».
 categorie: Application web
-domaine: UX / UI Design
-date: 2025-05-01
 tags: [UI Design, Web, Dashboard]
 outils: [Figma, Miro, Photoshop]
-enAvant: true
-ordre: 2
 ecrans:
   - ./images/kimmobilier/ecran-2.png
   - ./images/kimmobilier/ecran-3.png
@@ -19,6 +15,11 @@ couleur: '#1E4D74'
 couleur2: '#0B1E33'
 slogan: Votre prochain chez-vous en un clic
 format: web
+domaine: UX Design Web
+date: 2024-01-01
+periode: '2024'
+ordre: 5
+enAvant: false
 ---
 
 ## Le besoin

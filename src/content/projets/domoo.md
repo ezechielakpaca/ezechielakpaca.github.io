@@ -2,8 +2,6 @@
 titre: Domoo
 resume: Application mobile pour les locataires — bail en ligne, dépôt de garantie sécurisé et suivi du logement.
 categorie: Application mobile
-domaine: UX / UI Design
-date: 2026-03-01
 tags: [UI Design, Mobile, Immobilier]
 outils: [Figma]
 ecrans:
@@ -13,12 +11,15 @@ ecrans:
   - ./images/domoo/ecran-4.png
   - ./images/domoo/ecran-5.png
   - ./images/domoo/ecran-6.png
-enAvant: true
-ordre: 3
 couleur: '#1677FF'
 couleur2: '#0A3C9C'
 slogan: Le logement simplifié pour les locataires
 format: mobile
+domaine: UX Design Mobile
+date: 2026-01-01
+periode: '2026'
+ordre: 1
+enAvant: true
 ---
 
 ## Le besoin

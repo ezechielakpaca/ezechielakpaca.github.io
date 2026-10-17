@@ -36,7 +36,7 @@ const { Content } = await render(projet);
       <div><dt>Catégorie</dt><dd>{p.domaine}</dd></div>
       <div><dt>Contexte</dt><dd>{p.categorie}</dd></div>
       {p.statut || p.periode ? (
-        <div><dt>{p.statut ? 'Statut' : 'Période'}</dt><dd>{p.statut ?? p.periode}</dd></div>
+        <div><dt>{p.statut ? 'Statut' : 'Année'}</dt><dd>{p.statut ?? p.periode}</dd></div>
       ) : (
         <div><dt>Outils</dt><dd>{p.outils.length ? p.outils.join(', ') : '—'}</dd></div>
       )}

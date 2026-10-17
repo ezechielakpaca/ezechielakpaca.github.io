@@ -2,12 +2,8 @@
 titre: RNFISC
 resume: Plateforme web de la Municipalité de Cotonou pour recenser les recettes non fiscales, de la saisie terrain au tableau de bord.
 categorie: Application web
-domaine: UX / UI Design
-date: 2025-09-01
 tags: [UX/UI, Web, Back-office]
 outils: [Figma]
-enAvant: false
-ordre: 5
 couleur: '#0B5A82'
 couleur2: '#05263A'
 slogan: Recenser les recettes non fiscales
@@ -22,6 +18,11 @@ ecrans:
 couverture:
   - ./images/rnfisc/ecran-2.png
   - ./images/rnfisc/ecran-3.png
+domaine: UX Design Web
+date: 2024-01-01
+periode: '2024'
+ordre: 6
+enAvant: false
 ---
 
 ## Le besoin

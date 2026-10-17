@@ -2,12 +2,8 @@
 titre: Expertraffic
 resume: Application mobile pour apprendre à conduire en ligne — cours, quiz et examens blancs du code.
 categorie: Application mobile
-domaine: UX / UI Design
-date: 2025-06-01
 tags: [UI Design, Mobile, E-learning]
 outils: [Figma, Miro, Photoshop]
-enAvant: true
-ordre: 1
 couleur: '#7B3FF2'
 couleur2: '#3A1596'
 slogan: Apprendre à conduire en ligne
@@ -23,6 +19,11 @@ couverture:
   - ./images/expertraffic/ecran-2.png
   - ./images/expertraffic/ecran-3.png
   - ./images/expertraffic/ecran-4.png
+domaine: UX Design Mobile
+date: 2024-01-01
+periode: '2024'
+ordre: 4
+enAvant: true
 ---
 
 ## Le besoin

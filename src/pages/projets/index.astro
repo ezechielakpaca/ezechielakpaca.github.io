@@ -7,17 +7,17 @@ const projets = (await getCollection('projets', ({ data }) => !data.brouillon))
   .sort((a, b) => a.data.ordre - b.data.ordre || b.data.date.valueOf() - a.data.date.valueOf());
 
 // Categories built from the « domaine » field of each project
-const domaines = [...new Set(projets.map((p) => p.data.domaine))];
 const compte = (d: string) => projets.filter((p) => p.data.domaine === d).length;
+const domaines = [...new Set(projets.map((p) => p.data.domaine))].sort((a, b) => compte(b) - compte(a));
 ---
-<Base title="Projets" active="projets" description="Projets de Marie-Ezéchiel Akpaca : développement Java, full-stack, produit et UX.">
+<Base title="Projets" active="projets" description="Projets UX design de Marie-Ezéchiel Akpaca : applications mobiles et web.">
   <section class="page-head">
     <div class="blob a" aria-hidden="true"></div>
     <div class="blob b" aria-hidden="true"></div>
     <div class="wrap">
       <span class="crumbs glass rise"><a href="/">Accueil</a> / Projets</span>
       <h1 class="rise" style="--d:.1s">Mes <span class="accent">projets</span>.</h1>
-      <p class="intro rise" style="--d:.2s">Développement, produit et UX.</p>
+      <p class="intro rise" style="--d:.2s">Applications mobiles et web, du parcours à l’interface.</p>
     </div>
   </section>
 

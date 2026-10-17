@@ -2,9 +2,7 @@
 titre: Foodzia
 resume: Application mobile de repas du midi pour les salariés — formules, plat du jour et retrait par QR code.
 categorie: Application mobile
-domaine: Produit & UX
 role: Conception produit et UI
-date: 2026-09-01
 tags: [Produit, UI Design, Mobile]
 outils: [Figma]
 couleur: '#E8553A'
@@ -22,8 +20,11 @@ couverture:
   - ./images/foodzia/ecran-2.png
   - ./images/foodzia/ecran-9.png
   - ./images/foodzia/ecran-3.png
-enAvant: false
-ordre: 8
+domaine: UX Design Mobile
+date: 2026-01-01
+periode: '2026'
+ordre: 2
+enAvant: true
 ---
 
 ## Le besoin
