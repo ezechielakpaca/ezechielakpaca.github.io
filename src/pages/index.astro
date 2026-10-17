@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import Circuit from '../components/Circuit.astro';
 import photo from '../assets/photo-profil.jpg';
 import {
   profil, stage, experiences, competences, formation, certifications, langues, motsCles, chiffres, technos,
@@ -74,12 +73,18 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
   <section class="section" id="a-propos">
     <div class="wrap about">
       <div class="reveal">
-        <p class="eyebrow led-eyebrow">À propos</p>
+        <p class="eyebrow">À propos</p>
         <p class="about-statement">Je comprends le <b>besoin</b>, je dessine le <b>parcours</b>, puis je <b class="accent">code le produit</b>.</p>
         <p class="about-text">Backend Java en banque, UX d’une application de microcrédit, gestion de produit : je fais le lien entre utilisateurs et développeurs.</p>
       </div>
-      <div class="circuit-wrap reveal" style="--d:.15s">
-        <Circuit chiffres={chiffres} />
+      <div class="stats-wrap reveal" style="--d:.15s">
+        <div class="blob a" aria-hidden="true"></div>
+        <div class="blob b" aria-hidden="true"></div>
+        <div class="stats">
+          {chiffres.map((c) => (
+            <div class="stat glass"><b>{c.valeur}<em>{c.unite}</em></b><span>{c.label}</span></div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
