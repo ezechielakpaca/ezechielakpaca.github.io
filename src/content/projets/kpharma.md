@@ -4,7 +4,6 @@ resume: Application mobile et web pour les pharmacies, de la première installat
 categorie: Application mobile & web
 domaine: UX / UI Design
 date: 2025-03-01
-statut: En cours
 tags: [UX/UI, Mobile, Santé]
 outils: [Figma]
 ordre: 7
@@ -24,7 +23,3 @@ Donner aux pharmacies un outil simple, sur mobile et sur le web.
 - Parcours de première installation
 - Informations de la pharmacie
 - Application mobile
-
-## Avancement
-
-Projet en cours de conception.
