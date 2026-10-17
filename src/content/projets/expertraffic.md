@@ -12,7 +12,17 @@ couleur: '#7B3FF2'
 couleur2: '#3A1596'
 slogan: Apprendre à conduire en ligne
 format: mobile
-points: [Cours vidéo et audio, Quiz et examens blancs, Catégories de permis]
+ecrans:
+  - ./images/expertraffic/ecran-1.png
+  - ./images/expertraffic/ecran-2.png
+  - ./images/expertraffic/ecran-3.png
+  - ./images/expertraffic/ecran-4.png
+  - ./images/expertraffic/ecran-5.png
+  - ./images/expertraffic/ecran-6.png
+couverture:
+  - ./images/expertraffic/ecran-2.png
+  - ./images/expertraffic/ecran-3.png
+  - ./images/expertraffic/ecran-4.png
 ---
 
 ## Le besoin
