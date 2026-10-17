@@ -24,7 +24,7 @@ const fan = p.ecrans.slice(0, 3);
     <Image src={p.image} alt={`Aperçu du projet ${p.titre}`} width={width} loading={eager ? 'eager' : 'lazy'} />
   ) : fan.length ? (
     <div class="fan" aria-hidden="true">
-      {fan.map((e) => <Image src={e} alt="" width={300} class="phone" loading={eager ? 'eager' : 'lazy'} />)}
+      {fan.map((e) => <Image src={e} alt="" width={Math.min(e.width, 600)} quality={90} class="phone" loading={eager ? 'eager' : 'lazy'} />)}
     </div>
   ) : (
     <div class="art" aria-hidden="true">

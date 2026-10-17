@@ -66,7 +66,7 @@ const { Content } = await render(projet);
         <div class:list={['screens-grid', { web: p.format === 'web' }]}>
           {p.ecrans.map((e, i) => (
             <figure class="screen reveal" style={`--d:${(i % 4) * 0.06}s`}>
-              <Image src={e} alt={`${p.titre}, écran ${i + 1}`} width={p.format === 'web' ? 900 : 430} />
+              <Image src={e} alt={`${p.titre}, écran ${i + 1}`} width={Math.min(e.width, p.format === 'web' ? 1600 : 860)} quality={90} />
             </figure>
           ))}
         </div>

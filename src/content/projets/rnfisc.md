@@ -14,19 +14,10 @@ slogan: Recenser les recettes non fiscales
 format: web
 ecrans:
   - ./images/rnfisc/ecran-1.webp
-  - ./images/rnfisc/ecran-15.webp
   - ./images/rnfisc/ecran-2.png
   - ./images/rnfisc/ecran-3.png
   - ./images/rnfisc/ecran-4.png
-  - ./images/rnfisc/ecran-5.png
-  - ./images/rnfisc/ecran-6.png
-  - ./images/rnfisc/ecran-7.png
-  - ./images/rnfisc/ecran-8.png
-  - ./images/rnfisc/ecran-9.png
-  - ./images/rnfisc/ecran-10.png
   - ./images/rnfisc/ecran-11.png
-  - ./images/rnfisc/ecran-12.png
-  - ./images/rnfisc/ecran-13.png
   - ./images/rnfisc/ecran-14.png
 couverture:
   - ./images/rnfisc/ecran-2.png

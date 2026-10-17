@@ -30,12 +30,12 @@ const loading = eager ? 'eager' : 'lazy';
         ? shots.map((s) => (
             <div class="browser">
               <span class="browser-bar"><i></i><i></i><i></i></span>
-              <Image src={s} alt="" width={700} loading={loading} />
+              <Image src={s} alt="" width={Math.min(s.width, 1400)} quality={90} loading={loading} />
             </div>
           ))
         : shots.map((s) => (
             <div class="phone-frame">
-              <Image src={s} alt="" width={320} loading={loading} />
+              <Image src={s} alt="" width={Math.min(s.width, 640)} quality={90} loading={loading} />
             </div>
           ))}
     </div>

@@ -12,15 +12,12 @@ couleur2: '#6E1A0E'
 slogan: Fini le stress du repas de midi
 format: mobile
 ecrans:
-  - ./images/foodzia/ecran-1.png
   - ./images/foodzia/ecran-9.png
   - ./images/foodzia/ecran-2.png
   - ./images/foodzia/ecran-3.png
   - ./images/foodzia/ecran-4.png
   - ./images/foodzia/ecran-5.png
   - ./images/foodzia/ecran-6.png
-  - ./images/foodzia/ecran-7.png
-  - ./images/foodzia/ecran-8.png
 couverture:
   - ./images/foodzia/ecran-2.png
   - ./images/foodzia/ecran-9.png
