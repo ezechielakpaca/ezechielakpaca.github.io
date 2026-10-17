@@ -7,13 +7,21 @@ date: 2026-01-01
 tags: [UX Research, Mobile, Fintech]
 outils: [Figma]
 ordre: 6
-ecrans:
-  - ./images/etontine/ecran-1.png
 couleur: '#4E7D38'
 couleur2: '#1F3B16'
 slogan: La tontine, simple et sécurisée
 format: mobile
-points: [Groupes et cycles, Portefeuille, Crédit et scoring]
+ecrans:
+  - ./images/etontine/ecran-1.png
+  - ./images/etontine/ecran-2.png
+  - ./images/etontine/ecran-3.png
+  - ./images/etontine/ecran-4.png
+  - ./images/etontine/ecran-5.png
+  - ./images/etontine/ecran-6.png
+couverture:
+  - ./images/etontine/ecran-1.png
+  - ./images/etontine/ecran-4.png
+  - ./images/etontine/ecran-5.png
 ---
 
 ## Le besoin
