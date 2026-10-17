@@ -18,7 +18,7 @@ ecrans:
 couverture:
   - ./images/rnfisc/ecran-2.png
   - ./images/rnfisc/ecran-3.png
-categories: [Application web]
+categories: [UX Design, Application web]
 date: 2024-01-01
 periode: '2024'
 ordre: 6

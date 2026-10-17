@@ -20,7 +20,7 @@ couverture:
   - ./images/foodzia/ecran-2.png
   - ./images/foodzia/ecran-9.png
   - ./images/foodzia/ecran-3.png
-categories: [Application mobile]
+categories: [UX Design, Application mobile]
 date: 2026-01-01
 periode: '2026'
 ordre: 2

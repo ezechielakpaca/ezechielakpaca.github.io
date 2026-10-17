@@ -19,7 +19,7 @@ couverture:
   - ./images/pharma/ecran-2.png
   - ./images/pharma/ecran-1.png
   - ./images/pharma/ecran-5.png
-categories: [UX Design, Application mobile]
+categories: [UX Design]
 date: 2023-01-01
 periode: '2023'
 ordre: 7

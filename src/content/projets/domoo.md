@@ -15,7 +15,7 @@ couleur: '#1677FF'
 couleur2: '#0A3C9C'
 slogan: Le logement simplifié pour les locataires
 format: mobile
-categories: [UX Design, Application mobile]
+categories: [UX Design]
 date: 2026-01-01
 periode: '2026'
 ordre: 1

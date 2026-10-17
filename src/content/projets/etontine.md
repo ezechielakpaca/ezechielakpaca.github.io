@@ -19,7 +19,7 @@ couverture:
   - ./images/etontine/ecran-1.png
   - ./images/etontine/ecran-4.png
   - ./images/etontine/ecran-5.png
-categories: [UX Design, Application mobile]
+categories: [UX Design]
 date: 2025-01-01
 periode: '2025'
 ordre: 3

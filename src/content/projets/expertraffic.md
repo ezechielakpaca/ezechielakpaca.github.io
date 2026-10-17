@@ -19,7 +19,7 @@ couverture:
   - ./images/expertraffic/ecran-2.png
   - ./images/expertraffic/ecran-3.png
   - ./images/expertraffic/ecran-4.png
-categories: [Application mobile]
+categories: [UX Design, Application mobile]
 date: 2024-01-01
 periode: '2024'
 ordre: 4
