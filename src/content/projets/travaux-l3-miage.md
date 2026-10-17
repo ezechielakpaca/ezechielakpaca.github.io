@@ -9,7 +9,7 @@ periode: 2026–2027
 tags: [Java, Haskell, C, TDD]
 icone: code
 enAvant: true
-ordre: 1
+ordre: 4
 ---
 
 ## Java

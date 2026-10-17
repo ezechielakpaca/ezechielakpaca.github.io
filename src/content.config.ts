@@ -18,6 +18,9 @@ const projets = defineCollection({
       tags: z.array(z.string()).default([]),
       icone: z.enum(['code', 'mobile', 'objet', 'web', 'data']).default('code'),
       image: image().optional(),
+      // Écrans affichés dans la galerie de la page projet
+      ecrans: z.array(image()).default([]),
+      outils: z.array(z.string()).default([]),
       depot: z.string().url().optional(),
       demo: z.string().url().optional(),
       enAvant: z.boolean().default(false),

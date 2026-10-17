@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import { Image } from 'astro:assets';
 import ProjectVisual from '../../components/ProjectVisual.astro';
 
 export async function getStaticPaths() {
@@ -29,12 +30,16 @@ const { Content } = await render(projet);
 
   <div class="wrap">
     <div class="detail-cover rise" style="--d:.25s">
-      <ProjectVisual projet={projet} width={1240} />
+      <ProjectVisual projet={projet} width={1600} eager />
     </div>
     <dl class="info glass rise" style="--d:.35s">
       <div><dt>Catégorie</dt><dd>{p.domaine}</dd></div>
       <div><dt>Contexte</dt><dd>{p.categorie}</dd></div>
-      <div><dt>{p.statut ? 'Statut' : 'Période'}</dt><dd>{p.statut ?? p.periode ?? p.date.getFullYear()}</dd></div>
+      {p.statut || p.periode ? (
+        <div><dt>{p.statut ? 'Statut' : 'Période'}</dt><dd>{p.statut ?? p.periode}</dd></div>
+      ) : (
+        <div><dt>Outils</dt><dd>{p.outils.length ? p.outils.join(', ') : '—'}</dd></div>
+      )}
       <div>
         {p.depot || p.demo ? (
           <>
@@ -54,6 +59,19 @@ const { Content } = await render(projet);
     <article class="story">
       <Content />
     </article>
+
+    {p.ecrans.length > 0 && (
+      <section class="screens" aria-label="Écrans du projet">
+        <h2 class="screens-title">Écrans</h2>
+        <div class="screens-grid">
+          {p.ecrans.map((e, i) => (
+            <figure class="screen reveal" style={`--d:${(i % 4) * 0.06}s`}>
+              <Image src={e} alt={`${p.titre}, écran ${i + 1}`} width={430} />
+            </figure>
+          ))}
+        </div>
+      </section>
+    )}
 
     <nav class="next" aria-label="Autres projets">
       {prev && <a href={`/projets/${prev.id}/`}><small>← Précédent</small><b>{prev.data.titre}</b></a>}

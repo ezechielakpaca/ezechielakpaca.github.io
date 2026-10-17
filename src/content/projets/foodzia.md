@@ -8,8 +8,8 @@ date: 2026-09-01
 statut: En conception
 tags: [Produit, UX, Mobile]
 icone: mobile
-enAvant: true
-ordre: 2
+enAvant: false
+ordre: 8
 ---
 
 ## Le besoin

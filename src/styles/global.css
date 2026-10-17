@@ -264,6 +264,15 @@ a:hover .visual img, a:hover .visual .art { transform: scale(1.04); }
 .visual .art svg .a { stroke: #a6f3e8; }
 .visual .word { position: absolute; left: 22px; right: 22px; bottom: 16px; font-size: clamp(1.6rem, 3.2vw, 2.8rem); font-weight: 800; letter-spacing: -0.04em; color: rgba(255, 255, 255, .14); line-height: 1; }
 
+/* Cover image and fanned phone screens */
+.visual.has-image { background: var(--bg-3); }
+.visual.has-screens .fan { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; transition: transform .8s var(--ease); }
+a:hover .visual .fan { transform: scale(1.04); }
+.fan .phone { width: 30%; max-width: 190px; height: auto; border-radius: 18px; box-shadow: 0 24px 50px -18px rgba(0, 0, 0, .55); border: 4px solid #0d1514; }
+.fan .phone:nth-child(1) { transform: translate(28%, 6%) rotate(-8deg); }
+.fan .phone:nth-child(2) { position: relative; z-index: 2; transform: translateY(-4%); }
+.fan .phone:nth-child(3) { transform: translate(-28%, 6%) rotate(8deg); }
+
 /* ---------- Projects page: filters + grid ---------- */
 .filters { display: inline-flex; flex-wrap: wrap; gap: 6px; padding: 6px; border-radius: 999px; margin-bottom: clamp(32px, 4vw, 48px); }
 .filter { border: 0; background: none; color: var(--fg-2); cursor: pointer; padding: 10px 18px; border-radius: 999px; font-weight: 600; font-size: .9rem; display: inline-flex; align-items: center; gap: 8px; transition: background .3s, color .3s; }
@@ -276,7 +285,7 @@ a:hover .visual img, a:hover .visual .art { transform: scale(1.04); }
 .card { display: flex; flex-direction: column; gap: 18px; transition: opacity .35s var(--ease), transform .35s var(--ease); }
 .card.hide { display: none; }
 .card.fading { opacity: 0; transform: scale(.97); }
-.card .visual { aspect-ratio: 4 / 3; border-radius: 26px; }
+.card .visual { aspect-ratio: 16 / 10; border-radius: 26px; }
 .card .meta-row { display: flex; justify-content: space-between; align-items: start; gap: 16px; }
 .card .kicker { font-size: .74rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
 .card h3 { font-size: 1.5rem; margin-top: 6px; }
@@ -403,6 +412,10 @@ a:hover .visual img, a:hover .visual .art { transform: scale(1.04); }
 .detail-cover { position: relative; z-index: 1; }
 .detail-cover .visual { aspect-ratio: 21 / 9; min-height: 260px; border-radius: 30px; }
 .detail-cover .visual .art .glyph { width: 18%; }
+.detail-cover .visual.has-image { aspect-ratio: auto; min-height: 0; }
+.detail-cover .visual.has-image img { height: auto; }
+.detail-cover .visual.has-screens { aspect-ratio: 16 / 8; }
+.detail-cover .fan .phone { width: 18%; max-width: 230px; }
 @media (max-width: 700px) { .detail-cover .visual { aspect-ratio: 4 / 3; } .detail-cover .visual .art .glyph { width: 34%; } }
 .info { position: relative; z-index: 2; margin: -48px clamp(12px, 4vw, 40px) 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-radius: 24px; overflow: hidden; }
 @media (max-width: 760px) { .info { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: -32px; } }
@@ -435,6 +448,13 @@ a:hover .visual img, a:hover .visual .art { transform: scale(1.04); }
 .story a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 .story code { font-size: .88em; background: var(--bg-3); padding: 2px 7px; border-radius: 6px; }
 .story img { border-radius: 18px; }
+
+/* Screens gallery on project pages */
+.screens { padding-bottom: clamp(48px, 6vw, 80px); }
+.screens-title { font-size: clamp(1.4rem, 2.4vw, 1.9rem); margin-bottom: 28px; }
+.screens-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: 20px; }
+.screen { margin: 0; border-radius: 22px; overflow: hidden; border: 1px solid var(--line); background: var(--bg-2); box-shadow: var(--shadow); aspect-ratio: 430 / 932; }
+.screen img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
 
 .next { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; border-top: 1px solid var(--line); padding-block: 40px 0; }
 .next a { padding: 24px 28px; border-radius: var(--radius); border: 1px solid var(--line); background: var(--bg-2); transition: border-color .35s, transform .35s var(--ease); }
