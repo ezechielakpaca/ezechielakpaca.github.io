@@ -1,0 +1,43 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  projet: CollectionEntry<'projets'>;
+}
+
+const { projet } = Astro.props;
+const p = projet.data;
+---
+<a class="proj" href={`/projets/${projet.id}/`}>
+  {p.image ? (
+    <div class="cover"><Image src={p.image} alt="" width={640} /></div>
+  ) : (
+    <div class="glyph" aria-hidden="true">
+      {p.icone === 'code' && (
+        <svg viewBox="0 0 72 72"><path d="M14 18 H58 V54 H14 Z" /><path d="M14 28 H58" /><path class="a" d="M24 38 L30 43 L24 48 M34 48 H46" /></svg>
+      )}
+      {p.icone === 'mobile' && (
+        <svg viewBox="0 0 72 72"><rect x="22" y="10" width="28" height="52" rx="5" /><path d="M28 20 H44 M28 26 H38" /><path class="a" d="M29 34 H43 V48 H29 Z M33 38 H35 V40 H33 Z M37 42 H39 V44 H37 Z" /><path d="M30 55 H42" /></svg>
+      )}
+      {p.icone === 'objet' && (
+        <svg viewBox="0 0 72 72"><path d="M10 40 L44 30 C 52 28, 60 30, 62 34 L44 40 Z" /><path class="a" d="M44 40 L58 44 C 60 45, 60 48, 57 48 L40 46 Z" /><path d="M10 40 L44 40" /></svg>
+      )}
+      {p.icone === 'web' && (
+        <svg viewBox="0 0 72 72"><rect x="10" y="14" width="52" height="40" rx="3" /><path d="M10 24 H62" /><path class="a" d="M18 32 H40 M18 38 H34 M18 44 H46" /></svg>
+      )}
+      {p.icone === 'data' && (
+        <svg viewBox="0 0 72 72"><ellipse cx="36" cy="18" rx="20" ry="7" /><path d="M16 18 V52 C16 60, 56 60, 56 52 V18" /><path class="a" d="M16 30 C16 38, 56 38, 56 30 M16 42 C16 50, 56 50, 56 42" /></svg>
+      )}
+    </div>
+  )}
+  <span class="label">{p.categorie}</span>
+  <div>
+    <h3>{p.titre}</h3>
+    <p>{p.resume}</p>
+  </div>
+  <div class="meta">
+    <span class="mono">{p.tags.slice(0, 3).join(' · ')}</span>
+    {(p.statut || p.periode) && <span class="mono">{p.statut ?? p.periode}</span>}
+  </div>
+</a>

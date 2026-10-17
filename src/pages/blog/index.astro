@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const articles = (await getCollection('blog', ({ data }) => !data.brouillon))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const formatDate = (d: Date) => d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<Base title="Blog" active="blog" description="Articles de Marie-Ezéchiel Akpaca sur le développement, le produit et l'UX.">
+  <section class="page-head">
+    <div class="wrap">
+      <a class="back" href="/">← Accueil</a>
+      <h1>Blog</h1>
+      <p class="intro">Notes sur ce que j’apprends : développement Java et web, conception de produits, UX.</p>
+    </div>
+  </section>
+  <section class="plate">
+    <div class="wrap">
+      {articles.length > 0 ? (
+        <ul class="posts">
+          {articles.map((a) => (
+            <li class="post">
+              <a href={`/blog/${a.id}/`}>
+                <time datetime={a.data.date.toISOString()}>{formatDate(a.data.date)}</time>
+                <div><h3>{a.data.titre}</h3><p>{a.data.description}</p></div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="empty">Le premier article arrive bientôt.</p>
+      )}
+    </div>
+  </section>
+</Base>

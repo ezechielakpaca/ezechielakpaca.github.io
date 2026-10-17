@@ -1,0 +1,182 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Schema from '../components/Schema.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { profil, stage, experiences, competences, formation, certifications, langues } from '../data/profil';
+
+const projets = (await getCollection('projets', ({ data }) => !data.brouillon))
+  .sort((a, b) => a.data.ordre - b.data.ordre || b.data.date.valueOf() - a.data.date.valueOf());
+const enAvant = projets.filter((p) => p.data.enAvant);
+const projetsAccueil = (enAvant.length ? enAvant : projets).slice(0, 3);
+
+const articles = (await getCollection('blog', ({ data }) => !data.brouillon))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const formatDate = (d: Date) => d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+<Base>
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-top">
+        <div>
+          <p class="label">L3 MIAGE · Université de Lille</p>
+          <h1>Du besoin métier <span class="thin">au</span> <em>code</em> qui tourne.</h1>
+          <p class="lede">
+            Je suis <strong>{profil.nom}</strong>, développeur <strong>Java / full-stack</strong> avec une vraie pratique de l’<strong>UX</strong>.
+            J’ai passé un an sur un core banking system en Spring Boot, puis conçu les parcours d’une application de microcrédit.
+            Je cherche un <strong>stage de 12 semaines à partir du 19 avril 2027</strong>.
+          </p>
+          <div class="cta">
+            <a class="btn primary" href="#contact">Me proposer un stage →</a>
+            <a class="btn ghost" href={profil.liens.github} target="_blank" rel="noopener">Voir mon GitHub ↗</a>
+          </div>
+        </div>
+        <Schema />
+      </div>
+
+      <div class="cartouche" aria-label="Résumé">
+        <div><span class="k">Formation</span><span class="v">L3 MIAGE</span></div>
+        <div><span class="k">Lieu</span><span class="v">{profil.ville}</span></div>
+        <div><span class="k">Début</span><span class="v">{stage.debut}</span></div>
+        <div><span class="k">Durée</span><span class="v">12 semaines min.</span></div>
+        <div><span class="k">Stack</span><span class="v">Java · Spring · Vue</span></div>
+        <div class="hl"><span class="k">Recherche</span><span class="v">Stage dev / analyse</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STAGE ============ -->
+  <section class="plate" id="stage">
+    <div class="wrap">
+      <div class="plate-head">
+        <p class="label">Stage recherché</p>
+        <div>
+          <h2>12 semaines pour construire un vrai produit avec votre équipe.</h2>
+          <p>Stage de fin de L3 MIAGE. Je suis à l’aise sur le backend comme sur l’interface, et je tiens à rester proche du besoin métier et des utilisateurs.</p>
+        </div>
+      </div>
+      <div class="stage">
+        <div class="stage-main">
+          <div>
+            <p class="label">Missions qui m’intéressent</p>
+            <h3>Développement en priorité, avec une dimension produit.</h3>
+          </div>
+          <ul class="tracks">
+            {stage.missions.map((m) => <li><b>{m.titre}</b><span>{m.detail}</span></li>)}
+          </ul>
+        </div>
+        <dl class="stage-spec">
+          {stage.fiche.map((f) => (
+            <div class="spec-row"><dt>{f.cle}</dt><dd>{f.valeur}{f.note && <small>{f.note}</small>}</dd></div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PARCOURS ============ -->
+  <section class="plate" id="parcours">
+    <div class="wrap">
+      <div class="plate-head">
+        <p class="label">Expériences</p>
+        <div><h2>Du backend bancaire à la conception d’interfaces.</h2></div>
+      </div>
+      <ol class="timeline">
+        {experiences.map((e) => (
+          <li class="job">
+            <div class="when"><b>{e.quand}</b>{e.ou}</div>
+            <div>
+              <h3>{e.poste}</h3>
+              <div class="org">{e.contexte}</div>
+              <ul>{e.points.map((pt) => <li set:html={pt} />)}</ul>
+              {e.tags.length > 0 && <div class="tagrow">{e.tags.map((t) => <span class="tag">{t}</span>)}</div>}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ PROJETS ============ -->
+  <section class="plate" id="projets">
+    <div class="wrap">
+      <div class="plate-head">
+        <p class="label">Projets</p>
+        <div>
+          <h2>Code, produit et objet.</h2>
+          <p>Mes travaux de L3, des produits numériques et un projet de design d’objet mené au DN MADE.</p>
+        </div>
+      </div>
+      <div class="projects">
+        {projetsAccueil.map((p) => <ProjectCard projet={p} />)}
+      </div>
+      {projets.length > projetsAccueil.length && (
+        <p class="more"><a href="/projets/">Voir les {projets.length} projets →</a></p>
+      )}
+    </div>
+  </section>
+
+  <!-- ============ BLOG ============ -->
+  {articles.length > 0 && (
+    <section class="plate" id="blog">
+      <div class="wrap">
+        <div class="plate-head">
+          <p class="label">Blog</p>
+          <div><h2>Ce que j’apprends en chemin.</h2></div>
+        </div>
+        <ul class="posts">
+          {articles.map((a) => (
+            <li class="post">
+              <a href={`/blog/${a.id}/`}>
+                <time datetime={a.data.date.toISOString()}>{formatDate(a.data.date)}</time>
+                <div><h3>{a.data.titre}</h3><p>{a.data.description}</p></div>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="more"><a href="/blog/">Tous les articles →</a></p>
+      </div>
+    </section>
+  )}
+
+  <!-- ============ COMPÉTENCES ============ -->
+  <section class="plate" id="competences">
+    <div class="wrap">
+      <div class="plate-head">
+        <p class="label">Compétences</p>
+        <div><h2>Ce que je sais faire, de la base de données à l’écran.</h2></div>
+      </div>
+      <div class="skills">
+        {competences.map((c) => (
+          <div class="skill">
+            <span class="label">{c.label}</span>
+            <h3>{c.titre}</h3>
+            <ul>{c.items.map((i) => <li>{i}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+
+      <div class="edu">
+        <div>
+          <h3 class="sub">Formation</h3>
+          {formation.map((f) => (
+            <div class="edu-item">
+              <b>{f.titre}</b><span class="yr">{f.annees}</span>
+              <span class="d">{f.detail}{f.note && <><br /><span class="mark">{f.note}</span></>}</span>
+            </div>
+          ))}
+        </div>
+        <div>
+          <h3 class="sub">Certifications</h3>
+          <ul class="certs">
+            {certifications.map((c) => <li><span>{c.titre}</span><span class="mono">{c.source}</span></li>)}
+          </ul>
+          <div class="langs">{langues.map((l) => <span>{l}</span>)}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,50 @@
+<svg class="drawing" viewBox="0 0 460 360" role="img" aria-label="Schéma : un parcours utilisateur sur mobile appelle une API REST Spring Boot, qui interroge une base SQL">
+  <!-- A: phone -->
+  <text class="big" x="20" y="28">A — PARCOURS</text>
+  <rect class="fillsoft" x="20" y="44" width="108" height="208" rx="14"/>
+  <rect class="obj-a" x="20" y="44" width="108" height="208" rx="14"/>
+  <path class="obj-a" d="M60 55 H88"/>
+  <path class="ln" d="M34 78 H90"/>
+  <path class="ln" d="M34 90 H70"/>
+  <rect class="obj" x="34" y="104" width="80" height="30" rx="3"/>
+  <text x="40" y="123">Montant</text>
+  <rect class="obj" x="34" y="142" width="80" height="30" rx="3"/>
+  <text x="40" y="161">Durée</text>
+  <path class="ln" d="M34 186 H104 M34 196 H86"/>
+  <rect class="obj-a" x="34" y="218" width="80" height="20" rx="10"/>
+  <text x="52" y="232" style="fill:var(--accent)">Valider</text>
+  <!-- dims phone -->
+  <path class="dim" d="M20 268 H128 M20 262 V274 M128 262 V274"/>
+  <text x="74" y="288" text-anchor="middle">390 pt</text>
+
+  <!-- flow A -> B -->
+  <path class="flow" d="M128 228 C 160 228, 160 150, 196 150"/>
+  <path class="head" d="M196 146 L204 150 L196 154 Z"/>
+  <text x="140" y="210">POST</text>
+
+  <!-- B: API -->
+  <text class="big" x="206" y="28">B — API REST</text>
+  <rect class="obj" x="206" y="44" width="236" height="150" rx="4"/>
+  <path class="ln" d="M206 64 H442"/>
+  <circle class="ln" cx="218" cy="54" r="3"/><circle class="ln" cx="230" cy="54" r="3"/><circle class="ln" cx="242" cy="54" r="3"/>
+  <text x="258" y="58">DemandeController.java</text>
+  <text class="code kw" x="218" y="86">@PostMapping("/demandes")</text>
+  <text class="code" x="218" y="104"><tspan class="kw">public</tspan> Demande creer(</text>
+  <text class="code" x="232" y="120">@Valid @RequestBody Demande d) {"{"}</text>
+  <text class="code" x="232" y="138">verifierEligibilite(d);</text>
+  <text class="code" x="232" y="156"><tspan class="kw">return</tspan> repository.save(d);</text>
+  <text class="code" x="218" y="174">{"}"}</text>
+
+  <!-- flow B -> C -->
+  <path class="flow" d="M324 194 V 238"/>
+  <path class="head" d="M320 238 L324 246 L328 238 Z"/>
+  <text x="332" y="222">SQL</text>
+
+  <!-- C: DB cylinder -->
+  <text class="big" x="206" y="268">C — DONNÉES</text>
+  <path class="obj" d="M270 260 V318 C 270 332, 378 332, 378 318 V260"/>
+  <ellipse class="obj" cx="324" cy="260" rx="54" ry="12"/>
+  <path class="ln" d="M270 282 C 270 294, 378 294, 378 282 M270 302 C 270 314, 378 314, 378 302"/>
+  <text x="392" y="300">INSERT</text>
+  <text x="392" y="314">INTO demande</text>
+</svg>

@@ -1,0 +1,100 @@
+---
+import '../styles/global.css';
+import { profil, stage } from '../data/profil';
+
+interface Props {
+  title?: string;
+  description?: string;
+  active?: 'projets' | 'blog';
+}
+
+const {
+  title,
+  description = `${profil.nom} — étudiant en L3 MIAGE à l'Université de Lille, développeur Java / full-stack avec une pratique UX. Recherche un stage de 12 semaines à partir du 19 avril 2027.`,
+  active,
+} = Astro.props;
+
+const pageTitle = title ? `${title} · ${profil.nom}` : profil.nom;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="wrap">
+        <a class="brand" href="/">{profil.nomCourt}<span>.</span></a>
+        <nav class="links" aria-label="Navigation">
+          <a href="/#stage">Stage</a>
+          <a href="/#parcours">Parcours</a>
+          <a href="/projets/" class={active === 'projets' ? 'nav-active' : undefined}>Projets</a>
+          <a href="/blog/" class={active === 'blog' ? 'nav-active' : undefined}>Blog</a>
+          <a href="/#contact">Contact</a>
+        </nav>
+        <a class="status" href="/#stage"><i></i>{stage.badge}</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <slot />
+    </main>
+
+    <section class="contact" id="contact">
+      <div class="wrap">
+        <p class="label">Contact</p>
+        <h2>Un stage à partir<br />du <em>19 avril 2027</em> ?</h2>
+        <p class="sub">Écrivez-moi : je vous envoie le CV adapté à votre offre, que ce soit en développement, en analyse fonctionnelle ou en UX.</p>
+        <div class="mail">
+          <span class="mail-addr" id="mail">{profil.email}</span>
+          <button class="copy" id="copy-mail" type="button">Copier l’adresse</button>
+        </div>
+        <div class="socials">
+          <a href={profil.liens.github} target="_blank" rel="noopener">GitHub ↗</a>
+          <a href={profil.liens.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href={profil.liens.behance} target="_blank" rel="noopener">Behance ↗</a>
+        </div>
+        <div class="foot mono">
+          <span>© {new Date().getFullYear()} {profil.nom}</span>
+          <span>L3 MIAGE · Université de Lille</span>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const btn = document.getElementById('copy-mail');
+      const addr = document.getElementById('mail');
+      if (btn && addr) {
+        btn.addEventListener('click', () => {
+          const text = (addr.textContent || '').trim();
+          const selectIt = () => {
+            const r = document.createRange();
+            r.selectNodeContents(addr);
+            const s = window.getSelection();
+            s?.removeAllRanges();
+            s?.addRange(r);
+            btn.textContent = 'Sélectionnée, faites Ctrl+C';
+          };
+          if (!navigator.clipboard) return selectIt();
+          navigator.clipboard.writeText(text).then(() => {
+            btn.textContent = 'Adresse copiée';
+            setTimeout(() => { btn.textContent = 'Copier l’adresse'; }, 2200);
+          }, selectIt);
+        });
+      }
+    </script>
+  </body>
+</html>

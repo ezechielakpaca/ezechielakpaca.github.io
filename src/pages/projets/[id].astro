@@ -1,0 +1,36 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const projets = await getCollection('projets', ({ data }) => !data.brouillon);
+  return projets.map((projet) => ({ params: { id: projet.id }, props: { projet } }));
+}
+
+const { projet } = Astro.props;
+const p = projet.data;
+const { Content } = await render(projet);
+---
+<Base title={p.titre} description={p.resume} active="projets">
+  <section class="page-head">
+    <div class="wrap">
+      <a class="back" href="/projets/">← Tous les projets</a>
+      <p class="label" style="margin-top:24px">{p.categorie}</p>
+      <h1>{p.titre}</h1>
+      <p class="intro">{p.resume}</p>
+      <div class="facts">
+        {(p.statut || p.periode) && <span class="tag">{p.statut ?? p.periode}</span>}
+        {p.tags.map((t) => <span class="tag">{t}</span>)}
+        {p.depot && <a class="tag" href={p.depot} target="_blank" rel="noopener">Code source ↗</a>}
+        {p.demo && <a class="tag" href={p.demo} target="_blank" rel="noopener">Voir en ligne ↗</a>}
+      </div>
+      {p.image && <Image class="cover-wide" src={p.image} alt="" width={1200} />}
+    </div>
+  </section>
+  <div class="wrap">
+    <article class="prose">
+      <Content />
+    </article>
+  </div>
+</Base>
