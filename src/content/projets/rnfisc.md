@@ -1,6 +1,6 @@
 ---
 titre: RNFISC
-resume: Plateforme de recensement des recettes non fiscales, avec des espaces Admin, Opérateur de saisie et Contrôleur.
+resume: Plateforme web de la Municipalité de Cotonou pour recenser les recettes non fiscales, de la saisie terrain au tableau de bord.
 categorie: Application web
 domaine: UX / UI Design
 date: 2025-09-01
@@ -8,24 +8,44 @@ tags: [UX/UI, Web, Back-office]
 outils: [Figma]
 enAvant: false
 ordre: 5
-couleur: '#4B32B8'
-couleur2: '#120C2B'
+couleur: '#0B5A82'
+couleur2: '#05263A'
 slogan: Recenser les recettes non fiscales
 format: web
-points: [Espace Admin, Opérateur de saisie, Contrôleurs]
+ecrans:
+  - ./images/rnfisc/ecran-1.webp
+  - ./images/rnfisc/ecran-15.webp
+  - ./images/rnfisc/ecran-2.png
+  - ./images/rnfisc/ecran-3.png
+  - ./images/rnfisc/ecran-4.png
+  - ./images/rnfisc/ecran-5.png
+  - ./images/rnfisc/ecran-6.png
+  - ./images/rnfisc/ecran-7.png
+  - ./images/rnfisc/ecran-8.png
+  - ./images/rnfisc/ecran-9.png
+  - ./images/rnfisc/ecran-10.png
+  - ./images/rnfisc/ecran-11.png
+  - ./images/rnfisc/ecran-12.png
+  - ./images/rnfisc/ecran-13.png
+  - ./images/rnfisc/ecran-14.png
+couverture:
+  - ./images/rnfisc/ecran-2.png
+  - ./images/rnfisc/ecran-3.png
 ---
 
 ## Le besoin
 
-Recenser et suivre les recettes non fiscales avec plusieurs profils d'utilisateurs, chacun avec ses propres droits.
+Recenser et suivre les recettes non fiscales de la commune, avec plusieurs profils d'utilisateurs : administrateurs, opérateurs de saisie et contrôleurs.
 
 ## Le produit
 
-- Espace Admin
-- Espace Opérateur de saisie
-- Espace Contrôleur
-- Guide de style, composants et architecture
+- Connexion et demande d'inscription
+- Tableau de bord avec indicateurs et graphique des enregistrements
+- Liste des recettes filtrable et exportable
+- Enquête terrain en 7 étapes, de l'enquêteur au bilan
+- Gestion des utilisateurs et des rôles
+- Paramètres et notifications
 
 ## Ma contribution
 
-Conception UX/UI de la plateforme dans Figma.
+Conception UX/UI de la plateforme dans Figma : parcours, écrans et composants.
