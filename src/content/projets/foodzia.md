@@ -1,22 +1,33 @@
 ---
 titre: Foodzia
-resume: Menus du jour, suivi du solde repas et paiement par QR code pour les salariés.
-categorie: Projet personnel
+resume: Application mobile de repas du midi pour les salariés — formules, plat du jour et retrait par QR code.
+categorie: Application mobile
 domaine: Produit & UX
-role: Conception produit et UX
+role: Conception produit et UI
 date: 2026-09-01
-tags: [Produit, UX, Mobile]
-icone: mobile
+tags: [Produit, UI Design, Mobile]
+outils: [Figma]
+couleur: '#E8553A'
+couleur2: '#6E1A0E'
+slogan: Fini le stress du repas de midi
+format: mobile
+points: [Formules repas, Plat du jour, Retrait par QR code]
 enAvant: false
 ordre: 8
 ---
 
 ## Le besoin
 
-Le midi, les salariés veulent savoir rapidement ce qu'il y a au menu, combien il leur reste sur leur solde et payer sans attendre.
+Le midi, un salarié veut un plat sain et local, sans perdre de temps à chercher ni à faire la queue.
 
-## Ce que fait le produit
+## Le produit
 
-- Consulter les menus du jour.
-- Suivre son solde repas.
-- Payer en présentant un QR code.
+- Onboarding et choix d'une formule
+- Inscription et lieu de travail
+- Plat du jour et menus
+- Retrait du repas par QR code
+- Profil, historique et messagerie
+
+## Ma contribution
+
+Conception du produit et de l'interface mobile dans Figma, de l'onboarding au retrait du repas.
