@@ -7,3 +7,6 @@ dist/
 # Anciennes versions statiques du portfolio
 portfolio.html
 /index.html
+
+# CV complet (avec numéro de téléphone), gardé en local
+/cv/
