@@ -34,14 +34,14 @@ export const experiences = [
     tags: ['Java', 'Spring Boot', 'SQL', 'Figma'],
   },
   {
-    quand: '2024 – auj.',
+    quand: '2024 – 2025',
     ou: 'Oranex Tech · Bénin',
     poste: 'Chef de produit digital',
     points: ['Vision produit et coordination design, développement et stratégie.'],
     tags: ['Produit', 'Agile'],
   },
   {
-    quand: '2023 · 6 mois',
+    quand: '2023 – 2024',
     ou: 'e-Gbavou · stage',
     poste: 'UX designer & développeur front-end',
     points: ['Interface en <strong>Vue.js / Nuxt.js</strong>, tests unitaires et intégration continue.'],
@@ -69,8 +69,8 @@ export const formation = [
   {
     titre: 'Licence 3 Informatique',
     lieu: 'IFRI, Université d’Abomey-Calavi',
-    annees: '2020 – 2023',
-    note: 'Soutenance mention Très Bien',
+    annees: '2020 – 2024',
+    note: 'Soutenance en 2024, mention Très Bien',
   },
 ];
 
