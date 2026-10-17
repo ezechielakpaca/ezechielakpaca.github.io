@@ -1,0 +1,151 @@
+---
+import Base from '../layouts/Base.astro';
+import { profil, stage } from '../data/profil';
+
+// Messages are delivered by FormSubmit (https://formsubmit.co) to the address below.
+// The very first message triggers an activation e-mail that must be confirmed once.
+const endpoint = `https://formsubmit.co/ajax/${profil.email}`;
+---
+<Base active="contact" title="Contact" description="Contacter Marie-Ezéchiel Akpaca pour un stage de 12 semaines à partir du 19 avril 2027.">
+  <section class="page-head">
+    <div class="blob a" aria-hidden="true"></div>
+    <div class="blob b" aria-hidden="true"></div>
+    <div class="wrap">
+      <span class="crumbs glass rise"><a href="/">Accueil</a> / Contact</span>
+      <h1 class="rise" style="--d:.1s">Parlons de votre <span class="accent">stage</span>.</h1>
+      <p class="intro rise" style="--d:.2s">Une offre, une question ou un échange : écrivez-moi, je vous réponds rapidement.</p>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="wrap contact-grid">
+      <form class="contact-form glass reveal" id="contact-form" action={endpoint} method="POST" novalidate>
+        <div class="field-row">
+          <label class="field">
+            <span>Nom *</span>
+            <input id="cf-nom" name="nom" type="text" autocomplete="name" required placeholder="Votre nom" />
+          </label>
+          <label class="field">
+            <span>Email *</span>
+            <input id="cf-email" name="email" type="email" autocomplete="email" required placeholder="vous@entreprise.fr" />
+          </label>
+        </div>
+        <label class="field">
+          <span>Entreprise</span>
+          <input id="cf-entreprise" name="entreprise" type="text" autocomplete="organization" placeholder="Facultatif" />
+        </label>
+        <fieldset class="field">
+          <legend>Objet *</legend>
+          <div class="chips">
+            <label class="chip-radio"><input type="radio" name="objet" value="Proposition de stage" checked /><span>Proposition de stage</span></label>
+            <label class="chip-radio"><input type="radio" name="objet" value="Entretien" /><span>Entretien</span></label>
+            <label class="chip-radio"><input type="radio" name="objet" value="Question" /><span>Question</span></label>
+            <label class="chip-radio"><input type="radio" name="objet" value="Autre" /><span>Autre</span></label>
+          </div>
+        </fieldset>
+        <label class="field">
+          <span>Message *</span>
+          <textarea id="cf-message" name="message" rows="6" required minlength="10" placeholder="Décrivez la mission, l'équipe, les dates…"></textarea>
+        </label>
+        <!-- anti-spam -->
+        <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="table" />
+
+        <div class="form-foot">
+          <button class="btn btn-fill" type="submit" id="cf-submit">Envoyer le message <span class="arr">↗</span></button>
+          <p class="form-status" id="cf-status" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <aside class="contact-side">
+        <div class="panel reveal" style="--d:.08s">
+          <p class="eyebrow">Email</p>
+          <div class="mail-line" style="margin-top:10px">
+            <span class="mail-addr" id="mail-side">{profil.email}</span>
+            <button class="copy" id="copy-side" type="button">Copier</button>
+          </div>
+          <p class="eyebrow" style="margin-top:24px">Réseaux</p>
+          <div class="socials" style="margin-top:12px">
+            <a href={profil.liens.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn"><i class="devicon-linkedin-plain"></i></a>
+            <a href={profil.liens.github} target="_blank" rel="noopener" aria-label="GitHub"><i class="devicon-github-original"></i></a>
+            <a href={profil.liens.behance} target="_blank" rel="noopener" aria-label="Behance"><i class="devicon-behance-plain"></i></a>
+          </div>
+        </div>
+        <div class="stage-mini reveal" style="--d:.16s">
+          <p class="eyebrow">Disponibilité</p>
+          <dl>
+            {stage.fiche.map((f) => (
+              <div><dt>{f.cle}</dt><dd>{f.valeur}{f.note && <small>{f.note}</small>}</dd></div>
+            ))}
+          </dl>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <script>
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    const status = document.getElementById('cf-status');
+    const submit = document.getElementById('cf-submit') as HTMLButtonElement | null;
+
+    const setStatus = (text: string, kind: 'ok' | 'err' | '') => {
+      if (!status) return;
+      status.textContent = text;
+      status.dataset.kind = kind;
+    };
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      // Client-side validation with clear messages
+      const fields = Array.from(form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input[required], textarea[required]'));
+      let firstInvalid: HTMLElement | null = null;
+      fields.forEach((f) => {
+        const ok = f.checkValidity();
+        f.closest('.field')?.classList.toggle('invalid', !ok);
+        if (!ok && !firstInvalid) firstInvalid = f;
+      });
+      if (firstInvalid) {
+        setStatus('Vérifiez les champs en rouge : nom, email valide et message de 10 caractères minimum.', 'err');
+        (firstInvalid as HTMLElement).focus();
+        return;
+      }
+
+      const data = Object.fromEntries(new FormData(form).entries());
+      if (data._honey) return; // bot
+      data._subject = `Portfolio — ${data.objet} (${data.nom})`;
+      data._replyto = data.email;
+
+      if (submit) { submit.disabled = true; submit.firstChild!.textContent = 'Envoi en cours… '; }
+      setStatus('', '');
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok || String(json.success) === 'false') throw new Error(json.message || 'Erreur');
+        form.reset();
+        form.classList.add('sent');
+        setStatus('Merci, votre message est bien parti. Je vous réponds rapidement.', 'ok');
+      } catch {
+        setStatus('L’envoi n’a pas abouti. Réessayez ou écrivez directement à l’adresse ci-contre.', 'err');
+      } finally {
+        if (submit) { submit.disabled = false; submit.firstChild!.textContent = 'Envoyer le message '; }
+      }
+    });
+
+    form?.querySelectorAll('input, textarea').forEach((f) =>
+      f.addEventListener('input', () => f.closest('.field')?.classList.remove('invalid')),
+    );
+
+    const copy = document.getElementById('copy-side');
+    copy?.addEventListener('click', () => {
+      const text = (document.getElementById('mail-side')?.textContent || '').trim();
+      const done = (l: string) => { copy.textContent = l; setTimeout(() => { copy.textContent = 'Copier'; }, 2000); };
+      if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => done('Copié ✓'), () => done('Ctrl+C'));
+      else done('Ctrl+C');
+    });
+  </script>
+</Base>

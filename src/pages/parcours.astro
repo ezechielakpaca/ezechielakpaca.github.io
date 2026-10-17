@@ -1,0 +1,91 @@
+---
+import Base from '../layouts/Base.astro';
+import { experiences, formation, certifications, langues, competences } from '../data/profil';
+---
+<Base active="parcours" title="Parcours" description="Parcours de Marie-Ezéchiel Akpaca : expériences en développement Java, UX design et gestion de produit, formation en informatique et en design.">
+  <section class="page-head">
+    <div class="blob a" aria-hidden="true"></div>
+    <div class="blob b" aria-hidden="true"></div>
+    <div class="wrap">
+      <span class="crumbs glass rise"><a href="/">Accueil</a> / Parcours</span>
+      <h1 class="rise" style="--d:.1s">Mon <span class="accent">parcours</span>.</h1>
+      <p class="intro rise" style="--d:.2s">Du développement backend à l’UX design, en passant par la gestion de produit.</p>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Expériences</p>
+          <h2>Ce que j’ai <b>fait</b>.</h2>
+        </div>
+      </div>
+      <ol class="vline">
+        {experiences.map((e, i) => (
+          <li class="vstep reveal" style={`--d:${i * 0.06}s`}>
+            <span class="vdot" aria-hidden="true"></span>
+            <div class="vdate glass">{e.quand}</div>
+            <article class="vcard">
+              <p class="vorg">{e.ou}</p>
+              <h3>{e.poste}</h3>
+              <ul>{e.points.map((pt) => <li set:html={pt} />)}</ul>
+              {e.tags.length > 0 && <div class="pills">{e.tags.map((t) => <span class="pill">{t}</span>)}</div>}
+            </article>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Formation</p>
+          <h2>Ce que j’ai <b>appris</b>.</h2>
+        </div>
+      </div>
+      <ol class="vline">
+        {formation.map((f, i) => (
+          <li class="vstep reveal" style={`--d:${i * 0.06}s`}>
+            <span class="vdot" aria-hidden="true"></span>
+            <div class="vdate glass">{f.annees}</div>
+            <article class="vcard">
+              <p class="vorg">{f.lieu}</p>
+              <h3>{f.titre}</h3>
+              {f.note && <p class="vnote">{f.note}</p>}
+            </article>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section tight">
+    <div class="wrap">
+      <div class="edu">
+        <div class="panel reveal">
+          <h3>Certifications</h3>
+          <ul class="certs">
+            {certifications.map((c) => <li><span>{c.titre}</span><span>{c.source}</span></li>)}
+          </ul>
+          <div class="langs">{langues.map((l) => <span>{l}</span>)}</div>
+        </div>
+        <div class="panel reveal" style="--d:.1s">
+          <h3>Compétences</h3>
+          {competences.map((c) => (
+            <div class="skill-line">
+              <p class="eyebrow">{c.label}</p>
+              <ul>{c.items.map((it) => <li>{it}</li>)}</ul>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="cta-band glass reveal">
+        <p>Un stage de 12 semaines à partir du <b>19 avril 2027</b> ?</p>
+        <a class="btn btn-fill" href="/contact/">Me contacter <span class="arr">↗</span></a>
+      </div>
+    </div>
+  </section>
+</Base>
