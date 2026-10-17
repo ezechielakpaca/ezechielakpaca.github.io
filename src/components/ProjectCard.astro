@@ -15,7 +15,7 @@ const p = projet.data;
   <div class="body">
     <div class="pills">{p.tags.slice(0, 3).map((t) => <span class="pill">{t}</span>)}</div>
     <h3>{p.titre}</h3>
-    <p class="cat">{p.domaine}</p>
+    <p class="cat">{p.categories.join(' · ')}</p>
     <p class="desc">{p.resume}</p>
     <div class="foot">
       <span class="link-arrow">Voir le projet <span class="arr">↗</span></span>

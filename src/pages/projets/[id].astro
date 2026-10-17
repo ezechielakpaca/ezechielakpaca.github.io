@@ -22,7 +22,7 @@ const { Content } = await render(projet);
     <div class="blob a" aria-hidden="true"></div>
     <div class="blob b" aria-hidden="true"></div>
     <div class="wrap">
-      <span class="crumbs glass rise"><a href="/">Accueil</a> / <a href="/projets/">Projets</a> / {p.domaine}</span>
+      <span class="crumbs glass rise"><a href="/">Accueil</a> / <a href="/projets/">Projets</a> / {p.categories[p.categories.length - 1]}</span>
       <h1 class="rise" style="--d:.1s">{p.titre}</h1>
       <p class="intro rise" style="--d:.2s">{p.resume}</p>
     </div>
@@ -33,7 +33,7 @@ const { Content } = await render(projet);
       <ProjectVisual projet={projet} width={1600} eager />
     </div>
     <dl class="info glass rise" style="--d:.35s">
-      <div><dt>Catégorie</dt><dd>{p.domaine}</dd></div>
+      <div><dt>{p.categories.length > 1 ? 'Catégories' : 'Catégorie'}</dt><dd>{p.categories.join(', ')}</dd></div>
       <div><dt>Contexte</dt><dd>{p.categorie}</dd></div>
       {p.statut || p.periode ? (
         <div><dt>{p.statut ? 'Statut' : 'Année'}</dt><dd>{p.statut ?? p.periode}</dd></div>

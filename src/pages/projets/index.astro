@@ -2,13 +2,14 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import GridCard from '../../components/GridCard.astro';
+import { ordreCategories } from '../../data/categories';
 
 const projets = (await getCollection('projets', ({ data }) => !data.brouillon))
   .sort((a, b) => a.data.ordre - b.data.ordre || b.data.date.valueOf() - a.data.date.valueOf());
 
-// Categories built from the « domaine » field of each project
-const compte = (d: string) => projets.filter((p) => p.data.domaine === d).length;
-const domaines = [...new Set(projets.map((p) => p.data.domaine))].sort((a, b) => compte(b) - compte(a));
+// Filters in a fixed order, only for categories that have projects
+const compte = (c: string) => projets.filter((p) => (p.data.categories as string[]).includes(c)).length;
+const domaines = ordreCategories.filter((c) => compte(c) > 0);
 ---
 <Base title="Projets" active="projets" description="Projets UX design de Marie-Ezéchiel Akpaca : applications mobiles et web.">
   <section class="page-head">
@@ -51,7 +52,7 @@ const domaines = [...new Set(projets.map((p) => p.data.domaine))].sort((a, b) =>
         cards.forEach((c) => c.classList.add('fading'));
         setTimeout(() => {
           cards.forEach((c) => {
-            const show = f === '*' || c.dataset.domaine === f;
+            const show = f === '*' || (c.dataset.categories ?? '').split('|').includes(f ?? '');
             c.classList.toggle('hide', !show);
             c.classList.add('in');
           });

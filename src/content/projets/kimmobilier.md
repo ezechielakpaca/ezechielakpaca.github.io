@@ -15,7 +15,7 @@ couleur: '#1E4D74'
 couleur2: '#0B1E33'
 slogan: Votre prochain chez-vous en un clic
 format: web
-domaine: UX Design Web
+categories: [Application web]
 date: 2024-01-01
 periode: '2024'
 ordre: 5
