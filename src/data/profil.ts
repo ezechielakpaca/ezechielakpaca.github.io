@@ -113,3 +113,24 @@ export const certifications = [
 ];
 
 export const langues = ['Français · C2', 'Anglais · A2'];
+
+// Bandeau défilant sous le hero
+export const motsCles = ['Java', 'Spring Boot', 'API REST', 'Vue.js', 'React', 'SQL', 'UX / UI', 'Figma', 'Analyse fonctionnelle'];
+
+// Chiffres de la section « À propos »
+export const chiffres = [
+  { valeur: '1', unite: 'an', label: 'de Java / Spring Boot sur un core banking system' },
+  { valeur: '20', unite: '+', label: 'personnes dans l’équipe de développement chez BFT' },
+  { valeur: '6', unite: 'mois', label: 'de stage en développement front-end' },
+  { valeur: '12', unite: 'sem.', label: 'de stage recherché à partir d’avril 2027' },
+];
+
+// Capsules de la section Compétences (icônes Devicon : https://devicon.dev)
+export const technos = [
+  { nom: 'Java', role: 'Backend', icone: 'devicon-java-plain colored' },
+  { nom: 'Spring Boot', role: 'API REST', icone: 'devicon-spring-plain colored' },
+  { nom: 'Vue.js', role: 'Front-end', icone: 'devicon-vuejs-plain colored' },
+  { nom: 'React', role: 'Front-end', icone: 'devicon-react-original colored' },
+  { nom: 'Figma', role: 'UX / UI', icone: 'devicon-figma-plain colored' },
+  { nom: 'Git', role: 'Versionnage', icone: 'devicon-git-plain colored' },
+];

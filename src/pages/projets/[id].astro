@@ -16,16 +16,16 @@ const { Content } = await render(projet);
   <section class="page-head">
     <div class="wrap">
       <a class="back" href="/projets/">← Tous les projets</a>
-      <p class="label" style="margin-top:24px">{p.categorie}</p>
+      <p class="eyebrow" style="margin-top:28px">{p.categorie}</p>
       <h1>{p.titre}</h1>
       <p class="intro">{p.resume}</p>
       <div class="facts">
-        {(p.statut || p.periode) && <span class="tag">{p.statut ?? p.periode}</span>}
-        {p.tags.map((t) => <span class="tag">{t}</span>)}
-        {p.depot && <a class="tag" href={p.depot} target="_blank" rel="noopener">Code source ↗</a>}
-        {p.demo && <a class="tag" href={p.demo} target="_blank" rel="noopener">Voir en ligne ↗</a>}
+        {(p.statut || p.periode) && <span class="pill">{p.statut ?? p.periode}</span>}
+        {p.tags.map((t) => <span class="pill">{t}</span>)}
+        {p.depot && <a class="pill" href={p.depot} target="_blank" rel="noopener">Code source ↗</a>}
+        {p.demo && <a class="pill" href={p.demo} target="_blank" rel="noopener">Voir en ligne ↗</a>}
       </div>
-      {p.image && <Image class="cover-wide" src={p.image} alt="" width={1200} />}
+      {p.image && <Image class="cover-wide" src={p.image} alt="" width={1240} />}
     </div>
   </section>
   <div class="wrap">

@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { profil, stage } from '../data/profil';
+import { profil } from '../data/profil';
 
 interface Props {
   title?: string;
@@ -14,8 +14,9 @@ const {
   active,
 } = Astro.props;
 
-const pageTitle = title ? `${title} · ${profil.nom}` : profil.nom;
+const pageTitle = title ? `${title} · ${profil.nom}` : `${profil.nom} — Développeur Java / full-stack`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const annee = new Date().getFullYear();
 ---
 <!doctype html>
 <html lang="fr">
@@ -24,6 +25,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#0b1110" />
     <link rel="canonical" href={canonical} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
@@ -32,69 +34,156 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.16.0/devicon.min.css" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
   </head>
   <body>
-    <header class="top">
+    <header class="nav" id="nav">
       <div class="wrap">
-        <a class="brand" href="/">{profil.nomCourt}<span>.</span></a>
-        <nav class="links" aria-label="Navigation">
-          <a href="/#stage">Stage</a>
+        <a class="logo" href="/" aria-label="Accueil"><span class="logo-mark">EA</span>Ezéchiel<span class="dot">.</span></a>
+        <nav class="nav-links" id="nav-links" aria-label="Navigation">
+          <a href="/#a-propos">À propos</a>
           <a href="/#parcours">Parcours</a>
-          <a href="/projets/" class={active === 'projets' ? 'nav-active' : undefined}>Projets</a>
-          <a href="/blog/" class={active === 'blog' ? 'nav-active' : undefined}>Blog</a>
+          <a href="/projets/" class={active === 'projets' ? 'active' : undefined}>Projets</a>
+          <a href="/blog/" class={active === 'blog' ? 'active' : undefined}>Blog</a>
           <a href="/#contact">Contact</a>
         </nav>
-        <a class="status" href="/#stage"><i></i>{stage.badge}</a>
+        <a class="btn btn-fill" href="/#contact">Me contacter <span class="arr">↗</span></a>
+        <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-links"><span></span><span></span></button>
       </div>
     </header>
 
-    <main id="top">
+    <main>
       <slot />
     </main>
 
-    <section class="contact" id="contact">
-      <div class="wrap">
-        <p class="label">Contact</p>
-        <h2>Un stage à partir<br />du <em>19 avril 2027</em> ?</h2>
-        <p class="sub">Écrivez-moi : je vous envoie le CV adapté à votre offre, que ce soit en développement, en analyse fonctionnelle ou en UX.</p>
-        <div class="mail">
-          <span class="mail-addr" id="mail">{profil.email}</span>
-          <button class="copy" id="copy-mail" type="button">Copier l’adresse</button>
+    <section class="call" id="contact" aria-label="Contact">
+      <div class="call-rows">
+        <div class="call-row">
+          {[0, 1].map(() => (
+            <span class="it">
+              <span class="big">Stage avril 2027</span><span class="star">✦</span>
+              <span class="big ghost">Travaillons ensemble</span><span class="star">✦</span>
+              <span class="big">Stage avril 2027</span><span class="star">✦</span>
+              <span class="big ghost">Travaillons ensemble</span><span class="star">✦</span>
+            </span>
+          ))}
         </div>
-        <div class="socials">
-          <a href={profil.liens.github} target="_blank" rel="noopener">GitHub ↗</a>
-          <a href={profil.liens.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
-          <a href={profil.liens.behance} target="_blank" rel="noopener">Behance ↗</a>
-        </div>
-        <div class="foot mono">
-          <span>© {new Date().getFullYear()} {profil.nom}</span>
-          <span>L3 MIAGE · Université de Lille</span>
+        <div class="call-row rev">
+          {[0, 1].map(() => (
+            <span class="it">
+              <a class="pill-big" href={`mailto:${profil.email}`}>Me contacter</a><span class="star">✦</span>
+              <a class="pill-big" href={profil.liens.linkedin} target="_blank" rel="noopener">LinkedIn</a><span class="star">✦</span>
+              <a class="pill-big" href={profil.liens.github} target="_blank" rel="noopener">GitHub</a><span class="star">✦</span>
+              <a class="pill-big" href={`mailto:${profil.email}`}>Me contacter</a><span class="star">✦</span>
+            </span>
+          ))}
         </div>
       </div>
     </section>
 
+    <footer class="footer">
+      <div class="wrap">
+        <div class="foot-grid">
+          <div>
+            <a class="logo" href="/"><span class="logo-mark">EA</span>Ezéchiel<span class="dot">.</span></a>
+            <p class="lead">Développeur Java / full-stack avec une pratique UX. Étudiant en L3 MIAGE à l’Université de Lille.</p>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <div class="mail-line">
+              <span class="mail-addr" id="mail">{profil.email}</span>
+              <button class="copy" id="copy-mail" type="button">Copier</button>
+            </div>
+            <p style="color:var(--fg-2);margin-top:10px">{profil.ville}</p>
+          </div>
+          <div>
+            <h4>Navigation</h4>
+            <ul>
+              <li><a href="/#a-propos">À propos</a></li>
+              <li><a href="/#stage">Stage recherché</a></li>
+              <li><a href="/projets/">Projets</a></li>
+              <li><a href="/blog/">Blog</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Réseaux</h4>
+            <div class="socials">
+              <a href={profil.liens.github} target="_blank" rel="noopener" aria-label="GitHub"><i class="devicon-github-original"></i></a>
+              <a href={profil.liens.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn"><i class="devicon-linkedin-plain"></i></a>
+              <a href={profil.liens.behance} target="_blank" rel="noopener" aria-label="Behance"><i class="devicon-behance-plain"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <span>© {annee} {profil.nom}</span>
+          <span>Fait avec Astro · Lille</span>
+        </div>
+      </div>
+    </footer>
+
+    <button class="to-top" id="to-top" type="button" aria-label="Revenir en haut">
+      <svg class="prog" viewBox="0 0 50 50" aria-hidden="true"><circle class="bg" cx="25" cy="25" r="24"></circle><circle class="fg" id="prog" cx="25" cy="25" r="24"></circle></svg>
+      <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5" /></svg>
+    </button>
+
     <script>
+      // Header background on scroll + back-to-top progress
+      const nav = document.getElementById('nav');
+      const toTop = document.getElementById('to-top');
+      const prog = document.getElementById('prog');
+      const onScroll = () => {
+        const y = window.scrollY;
+        nav?.classList.toggle('scrolled', y > 20);
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const ratio = max > 0 ? Math.min(y / max, 1) : 0;
+        if (prog) prog.style.strokeDashoffset = String(151 - 151 * ratio);
+        toTop?.classList.toggle('show', y > 500);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+      toTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // Mobile menu
+      const burger = document.getElementById('burger');
+      burger?.addEventListener('click', () => {
+        const open = nav?.classList.toggle('open') ?? false;
+        burger.setAttribute('aria-expanded', String(open));
+      });
+      document.querySelectorAll('#nav-links a').forEach((a) =>
+        a.addEventListener('click', () => { nav?.classList.remove('open'); burger?.setAttribute('aria-expanded', 'false'); }),
+      );
+
+      // Reveal on scroll
+      let pending = Array.from(document.querySelectorAll('.reveal'));
+      let ticking = false;
+      const reveal = () => {
+        ticking = false;
+        const limit = window.innerHeight * 0.92;
+        pending = pending.filter((el) => {
+          if (el.getBoundingClientRect().top < limit) { el.classList.add('in'); return false; }
+          return true;
+        });
+        if (!pending.length) {
+          window.removeEventListener('scroll', queue);
+          window.removeEventListener('resize', queue);
+        }
+      };
+      const queue = () => { if (!ticking) { ticking = true; requestAnimationFrame(reveal); } };
+      window.addEventListener('scroll', queue, { passive: true });
+      window.addEventListener('resize', queue);
+      reveal();
+
+      // Copy e-mail
       const btn = document.getElementById('copy-mail');
       const addr = document.getElementById('mail');
-      if (btn && addr) {
-        btn.addEventListener('click', () => {
-          const text = (addr.textContent || '').trim();
-          const selectIt = () => {
-            const r = document.createRange();
-            r.selectNodeContents(addr);
-            const s = window.getSelection();
-            s?.removeAllRanges();
-            s?.addRange(r);
-            btn.textContent = 'Sélectionnée, faites Ctrl+C';
-          };
-          if (!navigator.clipboard) return selectIt();
-          navigator.clipboard.writeText(text).then(() => {
-            btn.textContent = 'Adresse copiée';
-            setTimeout(() => { btn.textContent = 'Copier l’adresse'; }, 2200);
-          }, selectIt);
-        });
-      }
+      btn?.addEventListener('click', () => {
+        const text = (addr?.textContent || '').trim();
+        const done = (label: string) => { btn.textContent = label; setTimeout(() => { btn.textContent = 'Copier'; }, 2000); };
+        if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => done('Copié ✓'), () => done('Ctrl+C'));
+        else done('Ctrl+C');
+      });
     </script>
   </body>
 </html>

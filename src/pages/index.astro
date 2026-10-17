@@ -1,182 +1,262 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import Schema from '../components/Schema.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import { profil, stage, experiences, competences, formation, certifications, langues } from '../data/profil';
+import photo from '../assets/photo-profil.jpg';
+import {
+  profil, stage, experiences, competences, formation, certifications, langues, motsCles, chiffres, technos,
+} from '../data/profil';
 
 const projets = (await getCollection('projets', ({ data }) => !data.brouillon))
   .sort((a, b) => a.data.ordre - b.data.ordre || b.data.date.valueOf() - a.data.date.valueOf());
 const enAvant = projets.filter((p) => p.data.enAvant);
-const projetsAccueil = (enAvant.length ? enAvant : projets).slice(0, 3);
+const projetsAccueil = (enAvant.length ? enAvant : projets).slice(0, 4);
 
 const articles = (await getCollection('blog', ({ data }) => !data.brouillon))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 
 const formatDate = (d: Date) => d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+const pad = (n: number) => String(n + 1).padStart(2, '0');
 ---
 <Base>
   <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="wrap">
-      <div class="hero-top">
-        <div>
-          <p class="label">L3 MIAGE · Université de Lille</p>
-          <h1>Du besoin métier <span class="thin">au</span> <em>code</em> qui tourne.</h1>
-          <p class="lede">
-            Je suis <strong>{profil.nom}</strong>, développeur <strong>Java / full-stack</strong> avec une vraie pratique de l’<strong>UX</strong>.
-            J’ai passé un an sur un core banking system en Spring Boot, puis conçu les parcours d’une application de microcrédit.
-            Je cherche un <strong>stage de 12 semaines à partir du 19 avril 2027</strong>.
-          </p>
-          <div class="cta">
-            <a class="btn primary" href="#contact">Me proposer un stage →</a>
-            <a class="btn ghost" href={profil.liens.github} target="_blank" rel="noopener">Voir mon GitHub ↗</a>
-          </div>
+      <div>
+        <p class="hello rise" style="--d:.05s"><span class="wave" aria-hidden="true">👋</span> Bonjour !</p>
+        <h1 class="rise" style="--d:.15s">Je suis Marie&#8209;Ezéchiel <span class="accent">Akpaca</span></h1>
+        <p class="role rise" style="--d:.28s">Développeur <span class="typed" id="typed">Java / Spring Boot</span></p>
+        <p class="intro rise" style="--d:.4s">
+          Étudiant en L3 MIAGE à l’Université de Lille. Un an de backend sur un core banking system, puis la conception UX d’une application de microcrédit.
+          Je cherche un stage de 12 semaines à partir du 19 avril 2027.
+        </p>
+        <div class="hero-cta rise" style="--d:.52s">
+          <a class="btn btn-fill" href="#contact">Me proposer un stage <span class="arr">↗</span></a>
+          <a class="btn btn-line" href="/projets/">Voir mes projets</a>
+          <a class="badge-rot" href="#a-propos" aria-label="Défiler vers la présentation">
+            <svg class="ring" viewBox="0 0 118 118" aria-hidden="true">
+              <defs><path id="circ" d="M59,59 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0" /></defs>
+              <text><textPath href="#circ">Stage · avril 2027 · Disponible · Lille ·</textPath></text>
+            </svg>
+            <span class="core"><svg viewBox="0 0 20 20"><path d="M10 3v14M4 11l6 6 6-6" /></svg></span>
+          </a>
         </div>
-        <Schema />
       </div>
 
-      <div class="cartouche" aria-label="Résumé">
-        <div><span class="k">Formation</span><span class="v">L3 MIAGE</span></div>
-        <div><span class="k">Lieu</span><span class="v">{profil.ville}</span></div>
-        <div><span class="k">Début</span><span class="v">{stage.debut}</span></div>
-        <div><span class="k">Durée</span><span class="v">12 semaines min.</span></div>
-        <div><span class="k">Stack</span><span class="v">Java · Spring · Vue</span></div>
-        <div class="hl"><span class="k">Recherche</span><span class="v">Stage dev / analyse</span></div>
+      <div class="hero-photo rise" style="--d:.2s">
+        <div class="orbit" aria-hidden="true"></div>
+        <div class="disc"><Image src={photo} alt={`Portrait de ${profil.nom}`} width={460} loading="eager" /></div>
+        <div class="chip c1"><i aria-hidden="true">☕</i><div>Java / Spring Boot<small>1 an en core banking</small></div></div>
+        <div class="chip c2"><i aria-hidden="true">✦</i><div>Stage dès le 19.04.2027<small>12 semaines · Lille</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      {[0, 1].map(() => (
+        <span>
+          {motsCles.map((m, i) => (
+            <>
+              <span class={i % 2 ? 'outline' : undefined}>{m}</span>
+              <span class="star">✦</span>
+            </>
+          ))}
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="section" id="a-propos">
+    <div class="wrap about">
+      <div class="reveal">
+        <p class="eyebrow">À propos</p>
+        <p class="about-statement">Je comprends le <b>besoin métier</b>, je dessine le <b>parcours</b>, puis je <b class="accent">code le produit</b>.</p>
+        <p class="about-text">
+          Formé à l’informatique au Bénin (licence à l’IFRI) puis à Lille, j’ai travaillé sur des services bancaires en Java / Spring Boot avant de rejoindre l’équipe UX.
+          Je suis aussi chef de produit digital chez Oranex Tech. Cette double pratique me permet de parler aussi bien aux développeurs qu’aux utilisateurs.
+        </p>
+      </div>
+      <div class="stats reveal" style="--d:.15s">
+        {chiffres.map((c) => (
+          <div class="stat"><b>{c.valeur}<em> {c.unite}</em></b><span>{c.label}</span></div>
+        ))}
       </div>
     </div>
   </section>
 
   <!-- ============ STAGE ============ -->
-  <section class="plate" id="stage">
+  <section class="section" id="stage" style="padding-top:0">
     <div class="wrap">
-      <div class="plate-head">
-        <p class="label">Stage recherché</p>
+      <div class="stage-card reveal">
         <div>
+          <p class="eyebrow">Stage recherché</p>
           <h2>12 semaines pour construire un vrai produit avec votre équipe.</h2>
-          <p>Stage de fin de L3 MIAGE. Je suis à l’aise sur le backend comme sur l’interface, et je tiens à rester proche du besoin métier et des utilisateurs.</p>
-        </div>
-      </div>
-      <div class="stage">
-        <div class="stage-main">
-          <div>
-            <p class="label">Missions qui m’intéressent</p>
-            <h3>Développement en priorité, avec une dimension produit.</h3>
-          </div>
-          <ul class="tracks">
+          <p class="lead">Stage de fin de L3 MIAGE. Le développement en priorité, avec une dimension produit et utilisateur.</p>
+          <ul class="missions">
             {stage.missions.map((m) => <li><b>{m.titre}</b><span>{m.detail}</span></li>)}
           </ul>
         </div>
-        <dl class="stage-spec">
+        <dl class="fiche">
           {stage.fiche.map((f) => (
-            <div class="spec-row"><dt>{f.cle}</dt><dd>{f.valeur}{f.note && <small>{f.note}</small>}</dd></div>
+            <div><dt>{f.cle}</dt><dd>{f.valeur}{f.note && <small>{f.note}</small>}</dd></div>
           ))}
         </dl>
       </div>
     </div>
   </section>
 
-  <!-- ============ PARCOURS ============ -->
-  <section class="plate" id="parcours">
+  <!-- ============ PROJETS ============ -->
+  <section class="section" id="projets" style="padding-top:0">
     <div class="wrap">
-      <div class="plate-head">
-        <p class="label">Expériences</p>
-        <div><h2>Du backend bancaire à la conception d’interfaces.</h2></div>
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Mes projets</p>
+          <h2><b>Projets</b> sélectionnés.</h2>
+        </div>
+        <a class="btn btn-line" href="/projets/">Tous les projets <span class="arr">↗</span></a>
+      </div>
+      <div class="works">
+        {projetsAccueil.map((p, i) => <ProjectCard projet={p} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PARCOURS ============ -->
+  <section class="section" id="parcours" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Expériences</p>
+          <h2>Mon <b>parcours</b>.</h2>
+        </div>
+        <p>Du backend bancaire à la conception d’interfaces, en passant par la gestion de produit.</p>
       </div>
       <ol class="timeline">
-        {experiences.map((e) => (
-          <li class="job">
+        {experiences.map((e, i) => (
+          <li class="job reveal" style={`--d:${i * 0.08}s`}>
             <div class="when"><b>{e.quand}</b>{e.ou}</div>
             <div>
               <h3>{e.poste}</h3>
               <div class="org">{e.contexte}</div>
               <ul>{e.points.map((pt) => <li set:html={pt} />)}</ul>
-              {e.tags.length > 0 && <div class="tagrow">{e.tags.map((t) => <span class="tag">{t}</span>)}</div>}
+              {e.tags.length > 0 && <div class="pills">{e.tags.map((t) => <span class="pill">{t}</span>)}</div>}
             </div>
+            <span class="num" aria-hidden="true">{pad(i)}</span>
           </li>
         ))}
       </ol>
     </div>
   </section>
 
-  <!-- ============ PROJETS ============ -->
-  <section class="plate" id="projets">
-    <div class="wrap">
-      <div class="plate-head">
-        <p class="label">Projets</p>
-        <div>
-          <h2>Code, produit et objet.</h2>
-          <p>Mes travaux de L3, des produits numériques et un projet de design d’objet mené au DN MADE.</p>
-        </div>
-      </div>
-      <div class="projects">
-        {projetsAccueil.map((p) => <ProjectCard projet={p} />)}
-      </div>
-      {projets.length > projetsAccueil.length && (
-        <p class="more"><a href="/projets/">Voir les {projets.length} projets →</a></p>
-      )}
-    </div>
-  </section>
-
-  <!-- ============ BLOG ============ -->
-  {articles.length > 0 && (
-    <section class="plate" id="blog">
-      <div class="wrap">
-        <div class="plate-head">
-          <p class="label">Blog</p>
-          <div><h2>Ce que j’apprends en chemin.</h2></div>
-        </div>
-        <ul class="posts">
-          {articles.map((a) => (
-            <li class="post">
-              <a href={`/blog/${a.id}/`}>
-                <time datetime={a.data.date.toISOString()}>{formatDate(a.data.date)}</time>
-                <div><h3>{a.data.titre}</h3><p>{a.data.description}</p></div>
-              </a>
-            </li>
-          ))}
-        </ul>
-        <p class="more"><a href="/blog/">Tous les articles →</a></p>
-      </div>
-    </section>
-  )}
-
   <!-- ============ COMPÉTENCES ============ -->
-  <section class="plate" id="competences">
+  <section class="section" id="competences" style="padding-top:0">
     <div class="wrap">
-      <div class="plate-head">
-        <p class="label">Compétences</p>
-        <div><h2>Ce que je sais faire, de la base de données à l’écran.</h2></div>
+      <div class="section-head reveal" style="justify-content:center;text-align:center">
+        <div>
+          <p class="eyebrow">Compétences</p>
+          <h2>De la base de données <b>à l’écran</b>.</h2>
+        </div>
       </div>
-      <div class="skills">
-        {competences.map((c) => (
-          <div class="skill">
-            <span class="label">{c.label}</span>
-            <h3>{c.titre}</h3>
-            <ul>{c.items.map((i) => <li>{i}</li>)}</ul>
+      <div class="capsules">
+        {technos.map((t, i) => (
+          <div class="capsule reveal" style={`--d:${i * 0.07}s`}>
+            <span class="ico"><i class={t.icone} aria-hidden="true"></i></span>
+            <b>{t.nom}</b>
+            <span>{t.role}</span>
           </div>
         ))}
       </div>
+      <div class="skill-groups">
+        {competences.map((c, i) => (
+          <div class="skill-group reveal" style={`--d:${(i % 3) * 0.08}s`}>
+            <p class="eyebrow">{c.label}</p>
+            <h3 style="margin-top:8px">{c.titre}</h3>
+            <ul>{c.items.map((it) => <li>{it}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
-      <div class="edu">
+  <!-- ============ FORMATION ============ -->
+  <section class="section" id="formation" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head reveal">
         <div>
-          <h3 class="sub">Formation</h3>
+          <p class="eyebrow">Formation</p>
+          <h2>Études & <b>certifications</b>.</h2>
+        </div>
+      </div>
+      <div class="edu">
+        <div class="panel reveal">
+          <h3>Formation</h3>
           {formation.map((f) => (
             <div class="edu-item">
               <b>{f.titre}</b><span class="yr">{f.annees}</span>
-              <span class="d">{f.detail}{f.note && <><br /><span class="mark">{f.note}</span></>}</span>
+              <span class="d">{f.detail}</span>
+              {f.note && <span class="note">{f.note}</span>}
             </div>
           ))}
         </div>
-        <div>
-          <h3 class="sub">Certifications</h3>
+        <div class="panel reveal" style="--d:.12s">
+          <h3>Certifications</h3>
           <ul class="certs">
-            {certifications.map((c) => <li><span>{c.titre}</span><span class="mono">{c.source}</span></li>)}
+            {certifications.map((c) => <li><span>{c.titre}</span><span>{c.source}</span></li>)}
           </ul>
           <div class="langs">{langues.map((l) => <span>{l}</span>)}</div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- ============ BLOG ============ -->
+  {articles.length > 0 && (
+    <section class="section" id="blog" style="padding-top:0">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <p class="eyebrow">Blog</p>
+            <h2>Derniers <b>articles</b>.</h2>
+          </div>
+          <a class="btn btn-line" href="/blog/">Tous les articles <span class="arr">↗</span></a>
+        </div>
+        <div class="posts">
+          {articles.map((a, i) => (
+            <a class="post reveal" href={`/blog/${a.id}/`} style={`--d:${i * 0.08}s`}>
+              <span class="meta"><time datetime={a.data.date.toISOString()}>{formatDate(a.data.date)}</time></span>
+              <h3>{a.data.titre}</h3>
+              <p>{a.data.description}</p>
+              <span class="link-arrow">Lire l’article <span class="arr">↗</span></span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <script>
+    // Rotating role in the hero
+    const el = document.getElementById('typed');
+    const roles = ['Java / Spring Boot', 'full-stack', 'à l’esprit produit & UX'];
+    if (el && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      let i = 0;
+      el.style.transition = 'opacity .35s, transform .35s';
+      el.style.display = 'inline-block';
+      setInterval(() => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(8px)';
+        setTimeout(() => {
+          i = (i + 1) % roles.length;
+          el.textContent = roles[i];
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        }, 350);
+      }, 2800);
+    }
+  </script>
 </Base>
