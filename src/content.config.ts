@@ -20,6 +20,8 @@ const projets = defineCollection({
       image: image().optional(),
       // Écrans affichés dans la galerie de la page projet
       ecrans: z.array(image()).default([]),
+      // Écrans mis en avant sur la couverture (sinon les premiers de « ecrans »)
+      couverture: z.array(image()).default([]),
       outils: z.array(z.string()).default([]),
       // Couverture générée : couleurs du projet, accroche, type d'écrans
       couleur: z.string().optional(),

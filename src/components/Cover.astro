@@ -14,7 +14,7 @@ const p = projet.data;
 const c1 = p.couleur ?? '#276361';
 const c2 = p.couleur2 ?? '#163b3a';
 const web = p.format === 'web';
-const shots = p.ecrans.slice(0, web ? 2 : 3);
+const shots = (p.couverture.length ? p.couverture : p.ecrans).slice(0, web ? 2 : 3);
 const loading = eager ? 'eager' : 'lazy';
 ---
 <div class:list={['cover', web ? 'is-web' : 'is-mobile', { 'no-shots': !shots.length }]} style={`--c1:${c1};--c2:${c2}`}>
