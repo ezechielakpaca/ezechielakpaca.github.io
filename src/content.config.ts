@@ -21,6 +21,12 @@ const projets = defineCollection({
       // Écrans affichés dans la galerie de la page projet
       ecrans: z.array(image()).default([]),
       outils: z.array(z.string()).default([]),
+      // Couverture générée : couleurs du projet, accroche, type d'écrans
+      couleur: z.string().optional(),
+      couleur2: z.string().optional(),
+      slogan: z.string().optional(),
+      format: z.enum(['mobile', 'web']).default('mobile'),
+      points: z.array(z.string()).default([]),
       depot: z.string().url().optional(),
       demo: z.string().url().optional(),
       enAvant: z.boolean().default(false),

@@ -6,8 +6,14 @@ domaine: UX / UI Design
 date: 2026-01-01
 tags: [UX Research, Mobile, Fintech]
 outils: [Figma]
-icone: mobile
 ordre: 6
+ecrans:
+  - ./images/etontine/ecran-1.png
+couleur: '#4E7D38'
+couleur2: '#1F3B16'
+slogan: La tontine, simple et sécurisée
+format: mobile
+points: [Groupes et cycles, Portefeuille, Crédit et scoring]
 ---
 
 ## Le besoin

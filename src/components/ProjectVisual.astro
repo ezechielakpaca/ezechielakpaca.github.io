@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import Cover from './Cover.astro';
 
 // Project visual: the cover image if there is one, otherwise up to three
 // phone screens fanned out, otherwise a generated illustration.
@@ -15,9 +16,11 @@ const { projet, width = 900, tag, eager = false } = Astro.props;
 const p = projet.data;
 const fan = p.ecrans.slice(0, 3);
 ---
-<div class:list={['visual', { 'has-image': p.image, 'has-screens': !p.image && fan.length }]}>
+<div class:list={['visual', { 'has-cover': p.couleur, 'has-image': !p.couleur && p.image, 'has-screens': !p.couleur && !p.image && fan.length }]}>
   {tag && <span class="tag-float glass">{tag}</span>}
-  {p.image ? (
+  {p.couleur ? (
+    <Cover projet={projet} eager={eager} />
+  ) : p.image ? (
     <Image src={p.image} alt={`Aperçu du projet ${p.titre}`} width={width} loading={eager ? 'eager' : 'lazy'} />
   ) : fan.length ? (
     <div class="fan" aria-hidden="true">

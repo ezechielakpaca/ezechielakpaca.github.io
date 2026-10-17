@@ -6,9 +6,19 @@ domaine: UX / UI Design
 date: 2025-05-01
 tags: [UI Design, Web, Dashboard]
 outils: [Figma, Miro, Photoshop]
-image: ./images/kimmobilier/cover.png
 enAvant: true
 ordre: 2
+ecrans:
+  - ./images/kimmobilier/ecran-2.png
+  - ./images/kimmobilier/ecran-3.png
+  - ./images/kimmobilier/ecran-1.png
+  - ./images/kimmobilier/ecran-4.png
+  - ./images/kimmobilier/ecran-5.png
+  - ./images/kimmobilier/ecran-6.png
+couleur: '#1E4D74'
+couleur2: '#0B1E33'
+slogan: Votre prochain chez-vous en un clic
+format: web
 ---
 
 ## Le besoin

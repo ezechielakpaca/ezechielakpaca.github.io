@@ -15,6 +15,10 @@ ecrans:
   - ./images/domoo/ecran-6.png
 enAvant: true
 ordre: 3
+couleur: '#1677FF'
+couleur2: '#0A3C9C'
+slogan: Le logement simplifié pour les locataires
+format: mobile
 ---
 
 ## Le besoin

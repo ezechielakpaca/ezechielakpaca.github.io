@@ -7,8 +7,12 @@ date: 2025-03-01
 statut: En cours
 tags: [UX/UI, Mobile, Santé]
 outils: [Figma]
-image: ./images/pharma/cover.png
 ordre: 7
+couleur: '#12A150'
+couleur2: '#06512A'
+slogan: La pharmacie sur mobile et web
+format: mobile
+points: [Première installation, Infos de la pharmacie, Application mobile]
 ---
 
 ## Le besoin

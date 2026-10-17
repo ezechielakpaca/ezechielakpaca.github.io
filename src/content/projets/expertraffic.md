@@ -6,9 +6,13 @@ domaine: UX / UI Design
 date: 2025-06-01
 tags: [UI Design, Mobile, E-learning]
 outils: [Figma, Miro, Photoshop]
-image: ./images/expertraffic/cover.png
 enAvant: true
 ordre: 1
+couleur: '#7B3FF2'
+couleur2: '#3A1596'
+slogan: Apprendre à conduire en ligne
+format: mobile
+points: [Cours vidéo et audio, Quiz et examens blancs, Catégories de permis]
 ---
 
 ## Le besoin

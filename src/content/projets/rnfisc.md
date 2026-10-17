@@ -6,9 +6,13 @@ domaine: UX / UI Design
 date: 2025-09-01
 tags: [UX/UI, Web, Back-office]
 outils: [Figma]
-image: ./images/rnfisc/cover.png
 enAvant: false
 ordre: 5
+couleur: '#4B32B8'
+couleur2: '#120C2B'
+slogan: Recenser les recettes non fiscales
+format: web
+points: [Espace Admin, Opérateur de saisie, Contrôleurs]
 ---
 
 ## Le besoin

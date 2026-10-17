@@ -63,10 +63,10 @@ const { Content } = await render(projet);
     {p.ecrans.length > 0 && (
       <section class="screens" aria-label="Écrans du projet">
         <h2 class="screens-title">Écrans</h2>
-        <div class="screens-grid">
+        <div class:list={['screens-grid', { web: p.format === 'web' }]}>
           {p.ecrans.map((e, i) => (
             <figure class="screen reveal" style={`--d:${(i % 4) * 0.06}s`}>
-              <Image src={e} alt={`${p.titre}, écran ${i + 1}`} width={430} />
+              <Image src={e} alt={`${p.titre}, écran ${i + 1}`} width={p.format === 'web' ? 900 : 430} />
             </figure>
           ))}
         </div>

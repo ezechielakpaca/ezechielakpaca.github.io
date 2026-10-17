@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+// Branded project cover: project colour, name, tagline and device mockups
+// built from the project's screens. Without screens, shows key features instead.
+interface Props {
+  projet: CollectionEntry<'projets'>;
+  eager?: boolean;
+}
+
+const { projet, eager = false } = Astro.props;
+const p = projet.data;
+const c1 = p.couleur ?? '#276361';
+const c2 = p.couleur2 ?? '#163b3a';
+const web = p.format === 'web';
+const shots = p.ecrans.slice(0, web ? 2 : 3);
+const loading = eager ? 'eager' : 'lazy';
+---
+<div class:list={['cover', web ? 'is-web' : 'is-mobile', { 'no-shots': !shots.length }]} style={`--c1:${c1};--c2:${c2}`}>
+  <div class="cover-text">
+    <span class="cover-pill">{p.categorie}</span>
+    <strong class="cover-name">{p.titre}</strong>
+    {p.slogan && <span class="cover-slogan">{p.slogan}</span>}
+  </div>
+
+  {shots.length > 0 ? (
+    <div class="cover-devices" aria-hidden="true">
+      {web
+        ? shots.map((s) => (
+            <div class="browser">
+              <span class="browser-bar"><i></i><i></i><i></i></span>
+              <Image src={s} alt="" width={700} loading={loading} />
+            </div>
+          ))
+        : shots.map((s) => (
+            <div class="phone-frame">
+              <Image src={s} alt="" width={320} loading={loading} />
+            </div>
+          ))}
+    </div>
+  ) : (
+    p.points.length > 0 && (
+      <ul class="cover-points" aria-hidden="true">
+        {p.points.slice(0, 3).map((pt) => <li>{pt}</li>)}
+      </ul>
+    )
+  )}
+</div>
