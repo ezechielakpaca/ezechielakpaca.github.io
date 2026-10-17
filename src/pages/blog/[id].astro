@@ -21,7 +21,7 @@ const date = a.date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long',
   inLanguage: 'fr-FR',
   keywords: a.tags.join(', '),
   mainEntityOfPage: new URL(`/blog/${article.id}/`, Astro.site).href,
-  image: new URL('/og.png', Astro.site).href,
+  image: new URL('/og-site.png', Astro.site).href,
   author: { '@id': new URL('/#personne', Astro.site).href },
 }]}>
   <section class="page-head">

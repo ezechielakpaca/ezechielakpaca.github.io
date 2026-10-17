@@ -21,14 +21,14 @@ const {
   active,
   type = 'website',
   jsonld = [],
-  ogImagePath = '/og.png',
+  ogImagePath = '/og-site.png',
   ogImageAlt,
 } = Astro.props;
 
 const site = Astro.site!;
 const pageTitle = title
   ? `${title} · ${profil.nom}`
-  : `${profil.nom} — Stagiaire développeur Java / full-stack & UX designer à Lille`;
+  : `${profil.nom} — Développeur Java / full-stack & UX designer, en recherche de stage à Lille`;
 const canonical = new URL(Astro.url.pathname, site);
 const ogImage = new URL(ogImagePath, site);
 const annee = new Date().getFullYear();
@@ -77,7 +77,7 @@ const schemas = [personne, ...jsonld];
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={ogImageAlt ?? `${profil.nom}, stagiaire développeur Java / full-stack et UX designer`} />
+    <meta property="og:image:alt" content={ogImageAlt ?? `${profil.nom}, développeur Java / full-stack et UX designer en recherche de stage`} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
