@@ -93,7 +93,7 @@ const schemas = [personne, ...jsonld];
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Caveat:wght@600&display=swap" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/devicon@2.16.0/devicon.min.css" />
   </head>
   <body>
@@ -129,20 +129,20 @@ const schemas = [personne, ...jsonld];
         <div class="call-row">
           {[0, 1].map(() => (
             <span class="it">
-              <span class="big">Stage avril 2027</span><span class="star">✦</span>
-              <span class="big ghost">Travaillons ensemble</span><span class="star">✦</span>
-              <span class="big">Stage avril 2027</span><span class="star">✦</span>
-              <span class="big ghost">Travaillons ensemble</span><span class="star">✦</span>
+              <span class="big">Stage avril 2027</span><span class="sep" aria-hidden="true"></span>
+              <span class="big ghost">Travaillons ensemble</span><span class="sep" aria-hidden="true"></span>
+              <span class="big">Stage avril 2027</span><span class="sep" aria-hidden="true"></span>
+              <span class="big ghost">Travaillons ensemble</span><span class="sep" aria-hidden="true"></span>
             </span>
           ))}
         </div>
         <div class="call-row rev">
           {[0, 1].map(() => (
             <span class="it">
-              <a class="pill-big" href="/contact/">Me contacter</a><span class="star">✦</span>
-              <a class="pill-big" href={profil.liens.linkedin} target="_blank" rel="noopener">LinkedIn</a><span class="star">✦</span>
-              <a class="pill-big" href={profil.liens.github} target="_blank" rel="noopener">GitHub</a><span class="star">✦</span>
-              <a class="pill-big" href="/contact/">Me contacter</a><span class="star">✦</span>
+              <a class="pill-big" href="/contact/">Me contacter</a><span class="sep" aria-hidden="true"></span>
+              <a class="pill-big" href={profil.liens.linkedin} target="_blank" rel="noopener">LinkedIn</a><span class="sep" aria-hidden="true"></span>
+              <a class="pill-big" href={profil.liens.github} target="_blank" rel="noopener">GitHub</a><span class="sep" aria-hidden="true"></span>
+              <a class="pill-big" href="/contact/">Me contacter</a><span class="sep" aria-hidden="true"></span>
             </span>
           ))}
         </div>
@@ -197,6 +197,7 @@ const schemas = [personne, ...jsonld];
     </button>
 
     <script>
+      import '../scripts/motion';
       const root = document.documentElement;
       const nav = document.getElementById('nav');
 
@@ -244,7 +245,10 @@ const schemas = [personne, ...jsonld];
       };
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
-      toTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      toTop?.addEventListener('click', () => {
+        const l = (window as unknown as { __lenis?: { scrollTo: (y: number) => void } }).__lenis;
+        if (l) l.scrollTo(0); else window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
 
       // ----- Mobile menu -----
       const burger = document.getElementById('burger');

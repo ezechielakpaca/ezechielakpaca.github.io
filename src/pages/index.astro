@@ -51,7 +51,10 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
         <div class="orbit" aria-hidden="true"></div>
         <div class="disc"><Image src={photo} alt={`Portrait de ${profil.nom}`} width={460} loading="eager" /></div>
         <div class="chip c1 glass"><i aria-hidden="true" class="devicon-java-plain"></i><div>Java / Spring Boot<small>1 an en banque</small></div></div>
-        <div class="chip c2 glass"><i aria-hidden="true">✦</i><div>Stage avril 2027<small>12 semaines · Lille</small></div></div>
+        <div class="chip c2 glass"><span class="cal" aria-hidden="true"><b>avr.</b><i>19</i></span><div>Début du stage<small>12 semaines · Lille</small></div></div>
+        <span class="hand-note" aria-hidden="true">c’est moi&nbsp;!
+          <svg viewBox="0 0 90 60"><path d="M6 8 C 30 6, 58 18, 70 44" /><path d="M58 40 L 71 46 L 74 32" /></svg>
+        </span>
       </div>
     </div>
   </section>
@@ -64,7 +67,7 @@ const pad = (n: number) => String(n + 1).padStart(2, '0');
           {motsCles.map((m, i) => (
             <>
               <span class={i % 2 ? 'outline' : undefined}>{m}</span>
-              <span class="star">✦</span>
+              <span class="sep" aria-hidden="true"></span>
             </>
           ))}
         </span>
